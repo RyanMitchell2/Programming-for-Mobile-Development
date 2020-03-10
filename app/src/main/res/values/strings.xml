@@ -25,4 +25,9 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="karaoke_app">KARAOKE APP</string>
+    <string name="get_started">GET STARTED</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="profile">profile</string>
+    <string name="genius">GENIUS</string>
 </resources>
