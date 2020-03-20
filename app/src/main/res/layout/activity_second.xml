@@ -7,26 +7,13 @@
     android:background="#212121"
     tools:context=".SecondActivity">
 
-    <SearchView
-        android:id="@+id/mainSearch"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="8dp"
-        android:background="#424242"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/headerLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,8 +22,8 @@
 
         <ImageButton
             android:id="@+id/profile"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="#00FFFFFF"
             android:contentDescription="@string/profile"
             android:scaleType="centerCrop"
@@ -59,8 +46,8 @@
 
         <ImageButton
             android:id="@+id/settings"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:background="#00FFFFFF"
             android:scaleType="centerCrop"
             android:src="@drawable/wheel"
@@ -69,207 +56,82 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/leftSideLayout"
+    <SearchView
+        android:id="@+id/mainSearch"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="#303030"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/headerLayout" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/rightSideLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mainSearch">
 
-        <LinearLayout
-            android:id="@+id/songContainer1"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/leftSideText"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#424242"
-            android:orientation="vertical">
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="6dp"
+            android:fontFamily="@font/source_sans_pro_black"
+            android:text="Top Charts"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/rightSideText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:id="@+id/album1"
-                android:layout_width="match_parent"
-                android:layout_height="156dp"
-                android:layout_marginBottom="4dp"
-                android:background="#00FFFFFF"
-                android:scaleType="centerCrop"
-                android:src="@drawable/hunna1" />
-
-            <TextView
-                android:id="@+id/song1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:fontFamily="@font/source_sans_pro_bold"
-                android:text="She's Casual"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp" />
-
-            <TextView
-                android:id="@+id/artist1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_marginBottom="3dp"
-                android:fontFamily="@font/source_sans_pro_light"
-                android:text="The Hunna"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <Space
-            android:id="@+id/space1"
-            android:layout_width="match_parent"
-            android:layout_height="18dp" />
-
-        <LinearLayout
-            android:id="@+id/songContainer3"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/rightSideText"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="#424242"
-            android:orientation="vertical">
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/source_sans_pro_black"
+            android:text="Your Favourites"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/leftSideText"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:id="@+id/album2"
-                android:layout_width="match_parent"
-                android:layout_height="156dp"
-                android:layout_marginBottom="4dp"
-                android:background="#00FFFFFF"
-                android:scaleType="centerCrop"
-                android:src="@drawable/killers1" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/leftSideView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/rightSideView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/leftSideText">
 
-            <TextView
-                android:id="@+id/song2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:fontFamily="@font/source_sans_pro_bold"
-                android:text="Human"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp" />
+        </androidx.recyclerview.widget.RecyclerView>
 
-            <TextView
-                android:id="@+id/artist2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_marginBottom="3dp"
-                android:fontFamily="@font/source_sans_pro_light"
-                android:text="The Killers"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/rightSideLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/leftSideLayout"
-        app:layout_constraintTop_toBottomOf="@+id/mainSearch">
-
-        <LinearLayout
-            android:id="@+id/songContainer2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#424242"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/album3"
-                android:layout_width="match_parent"
-                android:layout_height="156dp"
-                android:layout_marginBottom="4dp"
-                android:background="#00FFFFFF"
-                android:scaleType="centerCrop"
-                android:src="@drawable/hunna2" />
-
-            <TextView
-                android:id="@+id/song3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:fontFamily="@font/source_sans_pro_bold"
-                android:text="Dare"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp" />
-
-            <TextView
-                android:id="@+id/artist3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_marginBottom="3dp"
-                android:fontFamily="@font/source_sans_pro_light"
-                android:text="The Hunna"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <Space
-            android:id="@+id/space2"
-            android:layout_width="match_parent"
-            android:layout_height="18dp" />
-
-        <LinearLayout
-            android:id="@+id/songContainer4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#424242"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/album4"
-                android:layout_width="match_parent"
-                android:layout_height="156dp"
-                android:layout_marginBottom="4dp"
-                android:background="#00FFFFFF"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ajr1" />
-
-            <TextView
-                android:id="@+id/song4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:fontFamily="@font/source_sans_pro_bold"
-                android:text="Sober Up"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp" />
-
-            <TextView
-                android:id="@+id/artist4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:layout_marginRight="6dp"
-                android:layout_marginBottom="3dp"
-                android:fontFamily="@font/source_sans_pro_light"
-                android:text="AJR"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
-        </LinearLayout>
-    </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rightSideView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/leftSideView"
+            app:layout_constraintTop_toBottomOf="@+id/rightSideText" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
