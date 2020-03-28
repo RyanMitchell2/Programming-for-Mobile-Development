@@ -25,12 +25,23 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
+        Button skipBtn = findViewById(R.id.skipBtn);
+        skipBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View s) {
+                skipLoginActivity();
+            }
+        });
     }
+
     private void goToLoginActivity() {
-
         Intent intent = new Intent(this, LoginActivity.class);
-
         startActivity(intent);
-
     }
+
+    private void skipLoginActivity() {
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivity(intent);
+    }
+
 }

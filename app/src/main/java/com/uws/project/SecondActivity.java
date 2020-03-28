@@ -21,9 +21,11 @@ public class SecondActivity extends AppCompatActivity {
 
     ArrayList<String> songsLeft;
     ArrayList<String> artistsLeft;
+    ArrayList<String> artworkLeft;
 
     ArrayList<String> songsRight;
     ArrayList<String> artistsRight;
+    ArrayList<String> artworkRight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +36,13 @@ public class SecondActivity extends AppCompatActivity {
         // Profile button
         ImageButton button = (ImageButton) findViewById(R.id.profile);
         button.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
                 goToProfileActivity();
             }
-
         });
+
+
+        // Left side
 
         songsLeft = new ArrayList<>();
         songsLeft.add("Blinding Lights");
@@ -57,6 +60,16 @@ public class SecondActivity extends AppCompatActivity {
         artistsLeft.add("Joel Corry");
         artistsLeft.add("Dua Lipa");
 
+        artworkLeft = new ArrayList<>();
+        artworkLeft.add("hunna1");
+        artworkLeft.add("hunna2");
+        artworkLeft.add("killers1");
+        artworkLeft.add("hunna1");
+        artworkLeft.add("hunna2");
+        artworkLeft.add("killers1");
+
+        // Right side
+
         songsRight = new ArrayList<>();
         songsRight.add("Say So");
         songsRight.add("Someone You Loved");
@@ -73,14 +86,22 @@ public class SecondActivity extends AppCompatActivity {
         artistsRight.add("Eminem");
         artistsRight.add("Future");
 
+        artworkRight = new ArrayList<>();
+        artworkRight.add("hunna1");
+        artworkRight.add("hunna2");
+        artworkRight.add("killers1");
+        artworkRight.add("hunna2");
+        artworkRight.add("hunna1");
+        artworkRight.add("killers1");
+
         leftSideView = findViewById(R.id.leftSideView);
         leftSideView.setLayoutManager(new LinearLayoutManager(this));
-        adapterLeft = new SongAdapter(this,songsLeft,artistsLeft);
+        adapterLeft = new SongAdapter(this,songsLeft,artistsLeft,artworkLeft);
         leftSideView.setAdapter(adapterLeft);
 
         rightSideView = findViewById(R.id.rightSideView);
         rightSideView.setLayoutManager(new LinearLayoutManager(this));
-        adapterRight = new SongAdapter(this,songsRight,artistsRight);
+        adapterRight = new SongAdapter(this,songsRight,artistsRight,artworkRight);
         rightSideView.setAdapter(adapterRight);
 
     }
