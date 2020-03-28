@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#212121">
@@ -22,13 +21,14 @@
             android:id="@+id/detailArtwork"
             android:layout_width="125dp"
             android:layout_height="125dp"
+            android:contentDescription="@string/artwork_description"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/placeholder" />
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
             android:orientation="vertical"
@@ -43,7 +43,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/source_sans_pro_bold"
                 android:scrollHorizontally="false"
-                android:text="Title"
+                android:text="@string/placeholder"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp" />
 
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/source_sans_pro_light"
                 android:scrollHorizontally="false"
-                android:text="Artist"
+                android:text="@string/placeholder"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp" />
 
@@ -87,7 +87,7 @@
                 android:padding="12dp"
                 android:scrollIndicators="right"
                 android:scrollHorizontally="false"
-                android:text="Lyrics"
+                android:text="@string/placeholder"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp" />
         </LinearLayout>

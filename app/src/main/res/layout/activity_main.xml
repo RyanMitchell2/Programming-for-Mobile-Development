@@ -53,7 +53,7 @@
             android:id="@+id/skipBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Skip login (for development only)" />
+            android:text="@string/skip_button_temp" />
 
 
     </LinearLayout>

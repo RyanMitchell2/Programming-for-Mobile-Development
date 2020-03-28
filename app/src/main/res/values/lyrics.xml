@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="blinding_lights">
+        "Yeah\n\n"
+        "I been tryna call\n"
+        "I been on my own for long enough\n"
+        "Maybe you can show me how to love, maybe\n"
+        "I'm going through withdrawals\n"
+        "You don't even have to do too much\n"
+        "You can turn me on with just a touch, baby\n\n"
+        "I look around and Sin City's cold and empty (oh)\n"
+        "No one's around to judge me (oh)\n"
+        "I can't see clearly when you're gone\n\n"
+        "I said, ooh, I'm blinded by the lights\n"
+        "No, I can't sleep until I feel your touch\n"
+        "I said, ooh, I'm drowning in the night\n"
+        "Oh, when I'm like this, you're the one I trust\n"
+        "Hey, hey, hey\n\n"
+        "I'm running out of time\n"
+        "'Cause I can see the sun light up the sky\n"
+        "So I hit the road in overdrive, baby\n\n"
+        "Oh, the city's cold and empty (oh)\n"
+        "No one's around to judge me (oh)\n"
+        "I can't see clearly when you're gone\n\n"
+        "I said, ooh, I'm blinded by the lights\n"
+        "No, I can't sleep until I feel your touch\n"
+        "I said, ooh, I'm drowning in the night\n"
+        "Oh, when I'm like this, you're the one I trust"
+    </string>
+
+    <string name="say_so">Say So Lyrics</string>
+    <string name="dont_start_now">Don\'t Start Now Lyrics</string>
+    <string name="no_time_to_die">No Time To Die Lyrics</string>
+    <string name="lonely">Lonely Lyrics</string>
+    <string name="intentions">Intentions Lyrics</string>
+    <string name="shes_casual">She\'s Casual Lyrics</string>
+    <string name="someone_you_loved">Someone You Loved Lyrics</string>
+    <string name="human">Human Lyrics</string>
+    <string name="dare">Dare Lyrics</string>
+    <string name="sex">Sex Lyrics</string>
+    <string name="swim_for_your_life">Swim For Your Life Lyrics</string>
+
+</resources>

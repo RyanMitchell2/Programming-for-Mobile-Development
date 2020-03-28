@@ -14,19 +14,9 @@ import java.util.ArrayList;
 public class SecondActivity extends AppCompatActivity {
 
     public static String PACKAGE_NAME;
-    RecyclerView leftSideView;
-    RecyclerView rightSideView;
-
-    SongAdapter adapterLeft;
-    SongAdapter adapterRight;
-
-    ArrayList<String> songsLeft;
-    ArrayList<String> artistsLeft;
-    ArrayList<String> artworkLeft;
-
-    ArrayList<String> songsRight;
-    ArrayList<String> artistsRight;
-    ArrayList<String> artworkRight;
+    RecyclerView leftSideView, rightSideView;
+    SongAdapter adapterLeft, adapterRight;
+    ArrayList<String> songsLeft, artistsLeft, artworkLeft, songsRight, artistsRight, artworkRight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +26,18 @@ public class SecondActivity extends AppCompatActivity {
         PACKAGE_NAME = getApplicationContext().getPackageName();
 
         // Profile button
-        ImageButton button = findViewById(R.id.profile);
-        button.setOnClickListener(new View.OnClickListener() {
+        ImageButton profile_button = findViewById(R.id.profile);
+        profile_button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 goToProfileActivity();
+            }
+        });
+
+        // Profile button
+        ImageButton settings_button = findViewById(R.id.settings);
+        settings_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                goToSettingsActivity();
             }
         });
 
@@ -109,10 +107,14 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     private void goToProfileActivity() {
-
         Intent intent = new Intent(this, profileActivity.class);
         startActivity(intent);
-
     }
+
+    private void goToSettingsActivity() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
     }
 

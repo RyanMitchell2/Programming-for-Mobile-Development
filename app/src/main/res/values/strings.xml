@@ -28,6 +28,23 @@
     <string name="karaoke_app">KARAOKE APP</string>
     <string name="get_started">GET STARTED</string>
     <string name="sign_in">SIGN IN</string>
-    <string name="profile">profile</string>
     <string name="genius">GENIUS</string>
+    <string name="placeholder">Placeholder Text</string>
+    <string name="settings">Settings</string>
+    <string name="biography">My Biography</string>
+    <string name="comments">Top Comments</string>
+    <string name="liked">Top Liked Songs</string>
+    <string name="charts">Top Charts</string>
+    <string name="favourites">Your Favourites</string>
+    <string name="artwork_description">Album Cover Art</string>
+    <string name="profile_description">Profile Picture</string>
+    <string name="account_button_description">Account Button</string>
+    <string name="settings_button_description">Settings Button</string>
+    <string name="skip_button_temp">Skip login (for development only)</string>
+    <string name="font_style_option">Font Style</string>
+    <string name="font_colour_option">Font Colour</string>
+    <string name="font_size_option">Font Size</string>
+    <string name="scroll_speed_option">Scroll Speed</string>
+    <string name="background_option">Background Colour</string>
+    <string name="save_settings">Save Settings</string>
 </resources>
