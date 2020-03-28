@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class SecondActivity extends AppCompatActivity {
 
+    public static String PACKAGE_NAME;
     RecyclerView leftSideView;
     RecyclerView rightSideView;
 
@@ -32,9 +33,10 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         setTitle("Main Page");
+        PACKAGE_NAME = getApplicationContext().getPackageName();
 
         // Profile button
-        ImageButton button = (ImageButton) findViewById(R.id.profile);
+        ImageButton button = findViewById(R.id.profile);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 goToProfileActivity();
@@ -46,53 +48,53 @@ public class SecondActivity extends AppCompatActivity {
 
         songsLeft = new ArrayList<>();
         songsLeft.add("Blinding Lights");
-        songsLeft.add("Roses");
+        songsLeft.add("Say So");
         songsLeft.add("Don't Start Now");
         songsLeft.add("No Time To Die");
         songsLeft.add("Lonely");
-        songsLeft.add("Physical");
+        songsLeft.add("Intentions");
 
         artistsLeft = new ArrayList<>();
         artistsLeft.add("Weeknd");
-        artistsLeft.add("Saint Jhn");
+        artistsLeft.add("Doja Cat");
         artistsLeft.add("Dua Lipa");
         artistsLeft.add("Billie Eilish");
         artistsLeft.add("Joel Corry");
-        artistsLeft.add("Dua Lipa");
+        artistsLeft.add("Justin Bieber");
 
         artworkLeft = new ArrayList<>();
-        artworkLeft.add("hunna1");
-        artworkLeft.add("hunna2");
-        artworkLeft.add("killers1");
-        artworkLeft.add("hunna1");
-        artworkLeft.add("hunna2");
-        artworkLeft.add("killers1");
+        artworkLeft.add("blinding_lights");
+        artworkLeft.add("say_so");
+        artworkLeft.add("dont_start_now");
+        artworkLeft.add("no_time_to_die");
+        artworkLeft.add("lonely");
+        artworkLeft.add("intentions");
 
         // Right side
 
         songsRight = new ArrayList<>();
-        songsRight.add("Say So");
+        songsRight.add("She's Casual");
         songsRight.add("Someone You Loved");
-        songsRight.add("Intentions");
-        songsRight.add("You Should Be Sad");
-        songsRight.add("Godzilla");
-        songsRight.add("Life Is Good");
+        songsRight.add("Human");
+        songsRight.add("Dare");
+        songsRight.add("Sex");
+        songsRight.add("Swim For Your Life");
 
         artistsRight = new ArrayList<>();
-        artistsRight.add("Doja Cat");
+        artistsRight.add("The Hunna");
         artistsRight.add("Lewis Capaldi");
-        artistsRight.add("Justin Bieber");
-        artistsRight.add("Halsey");
-        artistsRight.add("Eminem");
-        artistsRight.add("Future");
+        artistsRight.add("The Killers");
+        artistsRight.add("The Hunna");
+        artistsRight.add("The 1975");
+        artistsRight.add("The Pale White");
 
         artworkRight = new ArrayList<>();
-        artworkRight.add("hunna1");
-        artworkRight.add("hunna2");
-        artworkRight.add("killers1");
-        artworkRight.add("hunna2");
-        artworkRight.add("hunna1");
-        artworkRight.add("killers1");
+        artworkRight.add("shes_casual");
+        artworkRight.add("someone_you_loved");
+        artworkRight.add("human");
+        artworkRight.add("dare");
+        artworkRight.add("sex");
+        artworkRight.add("swim_for_your_life");
 
         leftSideView = findViewById(R.id.leftSideView);
         leftSideView.setLayoutManager(new LinearLayoutManager(this));

@@ -4,15 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
+    private Context context;
     private LayoutInflater layoutInflater;
     private List<String> titles;
     private List<String> artists;
@@ -23,6 +28,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         this.titles = titles;
         this.artists = artists;
         this.artworks = artworks;
+        this.context = context;
     }
 
     @NonNull
@@ -38,8 +44,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         String title = titles.get(i);
         viewHolder.textTitle.setText(title);
 
-        String description = artists.get(i);
-        viewHolder.textArtist.setText(description);
+        String artist = artists.get(i);
+        viewHolder.textArtist.setText(artist);
+
+        String artwork = artworks.get(i);
+        int resourceId = context.getResources().getIdentifier(artwork,"drawable", SecondActivity.PACKAGE_NAME);
+        viewHolder.imageAlbum.setImageResource(resourceId);
 
     }
 
@@ -51,6 +61,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView textTitle, textArtist;
+        ImageView imageAlbum;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -66,6 +77,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             });
             textTitle = itemView.findViewById(R.id.textTitle);
             textArtist = itemView.findViewById(R.id.textArtist);
+            imageAlbum = itemView.findViewById(R.id.imageAlbum);
         }
 
     }
