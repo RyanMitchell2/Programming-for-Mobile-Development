@@ -3,13 +3,16 @@ package com.uws.project;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,6 +24,14 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
     Spinner styleSpinner, colourSpinner, sizeSpinner, speedSpinner, backgroundSpinner;
     ArrayList<String> settingsObject;
     int testPOS = 0;
+
+
+
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +69,9 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
 
     }
 
+
+
+
     // set spinner defaults
     public void setSpinnerDefaults() {
         Context context = getApplicationContext();
@@ -81,6 +95,8 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
         testPOS = getSavedSetting(backgroundSpinner,settingsObject.get(4));
         backgroundSpinner.setSelection(testPOS);
     }
+
+
 
     private int getSavedSetting(Spinner spinner, String setting){
         int index = 0;
@@ -185,5 +201,7 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
         setResult(2,intent);
         finish();
     }
+
+
 
 }

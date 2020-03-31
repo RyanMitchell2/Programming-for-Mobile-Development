@@ -1,19 +1,26 @@
 package com.uws.project;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
@@ -23,6 +30,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     private List<String> artists;
     private List<String> artworks;
     private List<String> settings;
+
+
 
     SongAdapter(Context context, List<String> titles, List<String> artists, List<String> artworks, List<String> settings) {
         this.layoutInflater = LayoutInflater.from(context);
@@ -39,6 +48,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         View view = layoutInflater.inflate(R.layout.song_card,viewGroup,false);
         return new ViewHolder(view);
     }
+
+
+
+
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
@@ -59,6 +72,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     public int getItemCount() {
         return titles.size();
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -81,7 +95,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             textTitle = itemView.findViewById(R.id.textTitle);
             textArtist = itemView.findViewById(R.id.textArtist);
             imageAlbum = itemView.findViewById(R.id.imageAlbum);
+
         }
 
     }
+
 }

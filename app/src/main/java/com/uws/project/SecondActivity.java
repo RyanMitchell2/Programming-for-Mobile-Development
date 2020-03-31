@@ -136,6 +136,9 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         startActivityForResult(intent, resultCode); // suppose resultCode == 2
     }
 
+
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {

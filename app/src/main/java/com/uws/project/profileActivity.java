@@ -3,6 +3,7 @@ package com.uws.project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -72,5 +73,17 @@ public class profileActivity extends AppCompatActivity {
         artworks[2] = findViewById(R.id.detailArtwork3);
         artworks[2].setImageResource(resourceId);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(2,intent);
+        finish();
+    }
+
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
