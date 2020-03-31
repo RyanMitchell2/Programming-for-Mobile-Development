@@ -47,4 +47,5 @@
     <string name="scroll_speed_option">Scroll Speed</string>
     <string name="background_option">Background Colour</string>
     <string name="save_settings">Save Settings</string>
+    <string name="defaultSettings">Default Settings</string>
 </resources>

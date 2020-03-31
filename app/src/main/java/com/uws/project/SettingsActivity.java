@@ -49,6 +49,13 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
                 }
             });
 
+        final Button default_button = findViewById(R.id.defaultButton);
+        default_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                defaultSettings();
+            }
+        });
+
     }
 
     // set spinner defaults
@@ -157,7 +164,15 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
         settingsObject.add((String) speed_option);
         settingsObject.add((String) background_option);
 
-        Intent intent = new Intent();;
+        Intent intent = new Intent();
+        intent.putExtra("settings", settingsObject);
+        setResult(2,intent);
+        finish();
+    }
+
+    private void defaultSettings() {
+        settingsObject = null;
+        Intent intent = new Intent();
         intent.putExtra("settings", settingsObject);
         setResult(2,intent);
         finish();
@@ -165,7 +180,7 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent();;
+        Intent intent = new Intent();
         intent.putExtra("settings", settingsObject);
         setResult(2,intent);
         finish();
