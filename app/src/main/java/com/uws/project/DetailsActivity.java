@@ -1,19 +1,24 @@
 package com.uws.project;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class DetailsActivity extends AppCompatActivity {
 
     TextView textTitle, textArtist, textLyrics;
     ImageView imageAlbum;
+    ArrayList<String> settingsObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,7 @@ public class DetailsActivity extends AppCompatActivity {
             String title = extras.getString("title");
             String artist = extras.getString("artist");
             String artwork = extras.getString("artwork");
+            settingsObject = extras.getStringArrayList("settings");
 
             Context context = getApplicationContext();
             CharSequence announcement = title + " by " + artist;
@@ -33,6 +39,11 @@ public class DetailsActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(context, announcement, duration);
             toast.show();
             setTitle(announcement);
+
+            announcement = "details toast:" + " " + settingsObject;
+            duration = Toast.LENGTH_SHORT;
+            toast = Toast.makeText(context, announcement, duration);
+            toast.show();
 
             textTitle = findViewById(R.id.detailTitle);
             textTitle.setText(title);
@@ -47,41 +58,47 @@ public class DetailsActivity extends AppCompatActivity {
             int lyricID = getResources().getIdentifier(artwork,"string",getPackageName());
             textLyrics = findViewById(R.id.detailLyrics);
             textLyrics.setText(lyricID);
+            lyricsAppearance();
 
         }
 
-        // testing stuff
+    }
 
-//        String testLyrics1 = "Yeah\n\n" +
-//                "I been tryna call\n" +
-//                "I been on my own for long enough\n" +
-//                "Maybe you can show me how to love, maybe\n" +
-//                "I'm going through withdrawals\n" +
-//                "You don't even have to do too much\n" +
-//                "You can turn me on with just a touch, baby\n\n" +
-//                "I look around and Sin City's cold and empty (oh)\n" +
-//                "No one's around to judge me (oh)\n" +
-//                "I can't see clearly when you're gone\n\n" +
-//                "I said, ooh, I'm blinded by the lights\n" +
-//                "No, I can't sleep until I feel your touch\n" +
-//                "I said, ooh, I'm drowning in the night\n" +
-//                "Oh, when I'm like this, you're the one I trust\n" +
-//                "Hey, hey, hey\n\n" +
-//                "I'm running out of time\n" +
-//                "'Cause I can see the sun light up the sky\n" +
-//                "So I hit the road in overdrive, baby\n\n" +
-//                "Oh, the city's cold and empty (oh)\n" +
-//                "No one's around to judge me (oh)\n" +
-//                "I can't see clearly when you're gone\n\n" +
-//                "I said, ooh, I'm blinded by the lights\n" +
-//                "No, I can't sleep until I feel your touch\n" +
-//                "I said, ooh, I'm drowning in the night\n" +
-//                "Oh, when I'm like this, you're the one I trust";
-//
-//        String testLyrics1 = getString(R.string.blinding_lights);
-//
-//        textLyrics = findViewById(R.id.detailLyrics);
-//        textLyrics.setText(testLyrics1);
+    public void lyricsAppearance() {
+
+        int selection;
+
+//        String[] style_placeholders = {"Light", "Regular", "Semi-bold", "Bold", "Black"};
+//        String[] style_values = {"Light", "Regular", "Semi-bold", "Bold", "Black"};
+
+        String[] colour_placeholders = {"White","Red","Blue","Green","Yellow"};
+        String[] colour_values = {"#FFFFFF","#ff0000","#0048ff","#00ff1e","#fffb00"};
+        selection = getSavedSetting(colour_placeholders, 1);
+        textLyrics.setTextColor(Color.parseColor(colour_values[selection]));
+
+        String[] size_placeholders = {"16sp", "18sp", "20sp", "22sp", "24sp"};
+        int[] size_values = {16,18,20,22,24};
+        selection = getSavedSetting(size_placeholders, 2);
+        textLyrics.setTextSize(size_values[selection]);
+
+//        Double[] speed_placeholders = {0.5,0.75,1.0,1.25,1.5};
+//        Double[] speed_values = {0.5,0.75,1.0,1.25,1.5};
+
+        String[] background_placeholders = {"White","Black","Grey","Blue","Red","Yellow"};
+        String[] background_values = {"#FFFFFF","#000000","#303030","#0048ff","#00ff1e","#fffb00"};
+        selection = getSavedSetting(background_placeholders, 4);
+        textLyrics.setBackgroundColor(Color.parseColor(background_values[selection]));
 
     }
+
+    private int getSavedSetting(String[] placeholders, int position){
+        int index = 0;
+        for (int i=0;i<placeholders.length;i++){
+            if (settingsObject.get(position).equals(placeholders[i])){
+                index = i;
+            }
+        }
+        return index;
+    }
+
 }

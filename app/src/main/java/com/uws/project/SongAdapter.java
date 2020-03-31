@@ -2,17 +2,17 @@ package com.uws.project;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.res.Resources;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.io.Serializable;
 import java.util.List;
 
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
@@ -22,13 +22,15 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     private List<String> titles;
     private List<String> artists;
     private List<String> artworks;
+    private List<String> settings;
 
-    SongAdapter(Context context, List<String> titles, List<String> artists, List<String> artworks) {
+    SongAdapter(Context context, List<String> titles, List<String> artists, List<String> artworks, List<String> settings) {
         this.layoutInflater = LayoutInflater.from(context);
         this.titles = titles;
         this.artists = artists;
         this.artworks = artworks;
         this.context = context;
+        this.settings = settings;
     }
 
     @NonNull
@@ -72,6 +74,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                     i.putExtra("title",titles.get(getAdapterPosition()));
                     i.putExtra("artist",artists.get(getAdapterPosition()));
                     i.putExtra("artwork",artworks.get(getAdapterPosition()));
+                    i.putExtra("settings", (Serializable) settings);
                     v.getContext().startActivity(i);
                 }
             });
