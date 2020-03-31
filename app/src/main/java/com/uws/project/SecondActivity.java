@@ -1,22 +1,26 @@
 package com.uws.project;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SecondActivity extends AppCompatActivity {
+public class SecondActivity extends AppCompatActivity implements Serializable {
 
     public static String PACKAGE_NAME;
     RecyclerView leftSideView, rightSideView;
     SongAdapter adapterLeft, adapterRight;
     ArrayList<String> songsLeft, artistsLeft, artworkLeft, songsRight, artistsRight, artworkRight;
+    ArrayList<String> settingsObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,11 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
+        initialiseAdapater();
+
+    }
+
+    private void initialiseAdapater() {
 
         // Left side
 
@@ -94,14 +103,23 @@ public class SecondActivity extends AppCompatActivity {
         artworkRight.add("sex");
         artworkRight.add("swim_for_your_life");
 
+        if (settingsObject == null) {
+            settingsObject = new ArrayList<>();
+            settingsObject.add("Light");
+            settingsObject.add("White");
+            settingsObject.add("18sp");
+            settingsObject.add("1x");
+            settingsObject.add("Grey");
+        }
+
         leftSideView = findViewById(R.id.leftSideView);
         leftSideView.setLayoutManager(new LinearLayoutManager(this));
-        adapterLeft = new SongAdapter(this,songsLeft,artistsLeft,artworkLeft);
+        adapterLeft = new SongAdapter(this,songsLeft,artistsLeft,artworkLeft,settingsObject);
         leftSideView.setAdapter(adapterLeft);
 
         rightSideView = findViewById(R.id.rightSideView);
         rightSideView.setLayoutManager(new LinearLayoutManager(this));
-        adapterRight = new SongAdapter(this,songsRight,artistsRight,artworkRight);
+        adapterRight = new SongAdapter(this,songsRight,artistsRight,artworkRight,settingsObject);
         rightSideView.setAdapter(adapterRight);
 
     }
@@ -112,9 +130,35 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     private void goToSettingsActivity() {
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
+        int resultCode = 2;
+        Intent intent = new Intent(this,SettingsActivity.class);
+        intent.putExtra("settings", settingsObject);
+        startActivityForResult(intent, resultCode); // suppose resultCode == 2
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 2) {
+            settingsObject = data.getStringArrayListExtra("settings");
+            initialiseAdapater();
+
+            Context context = getApplicationContext();
+            CharSequence announcement = "second toast:" + " " + settingsObject;
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, announcement, duration);
+            toast.show();
+        } else {
+            initialiseAdapater();
+            Context context = getApplicationContext();
+            CharSequence announcement = "second toast: bad result code";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, announcement, duration);
+            toast.show();
+        }
+    }
+
 
     }
 
