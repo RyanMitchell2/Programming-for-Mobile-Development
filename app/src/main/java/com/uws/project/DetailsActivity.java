@@ -1,6 +1,7 @@
 package com.uws.project;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -100,5 +101,18 @@ public class DetailsActivity extends AppCompatActivity {
         }
         return index;
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent();
+        setResult(2,intent);
+        finish();
+    }
+
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
 
 }
