@@ -62,18 +62,31 @@ public class DetailsActivity extends AppCompatActivity {
             imageAlbum = findViewById(R.id.detailArtwork);
             imageAlbum.setImageResource(albumID);
 
+
+
             int lyricID = getResources().getIdentifier(artwork,"string",getPackageName());
             textLyrics = findViewById(R.id.detailLyrics);
             textLyrics.setText(lyricID);
             lyricsAppearance();
+
+
+
+
 
         }
 
     }
 
     public void play (View v){
+        // PLACEHOLDER ARRAY UNTIL PASSING WORKS
+        Bundle extras = getIntent().getExtras();
+        Integer audio = null;
+        if (extras != null) {
+           audio = extras.getInt("audio");
+        }
+        int audioID = getResources().getIdentifier(String.valueOf(audio), "Integer", getPackageName());
         if (player == null) {
-            player = MediaPlayer.create(this, R.raw.blindinglights);
+            player = MediaPlayer.create(this, audioID);
             player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
@@ -130,7 +143,7 @@ public class DetailsActivity extends AppCompatActivity {
         textLyrics.setBackgroundColor(Color.parseColor(background_values[selection]));
 
     }
-
+// GETTING THE SETTINGS THAT HAVE BEEN SAVED PREVIOUSLY
     private int getSavedSetting(String[] placeholders, int position){
         int index = 0;
         for (int i=0;i<placeholders.length;i++){
@@ -140,7 +153,7 @@ public class DetailsActivity extends AppCompatActivity {
         }
         return index;
     }
-
+    // BACK BUTTON CODE
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();

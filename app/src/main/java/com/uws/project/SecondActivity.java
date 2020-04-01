@@ -21,6 +21,7 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
     SongAdapter adapterLeft, adapterRight;
     ArrayList<String> songsLeft, artistsLeft, artworkLeft, songsRight, artistsRight, artworkRight;
     ArrayList<String> settingsObject;
+    ArrayList<Integer> audioLeft, audioRight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,8 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         });
 
         initialiseAdapater();
+
+
 
     }
 
@@ -76,6 +79,14 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         artworkLeft.add("no_time_to_die");
         artworkLeft.add("lonely");
         artworkLeft.add("intentions");
+    // SET UP LEFT AUDIO
+        audioLeft = new ArrayList<>();
+        audioLeft.add(R.raw.blindinglights);
+        audioLeft.add(R.raw.sayso);
+        audioLeft.add(R.raw.dontstartnow);
+        audioLeft.add(R.raw.notimetodie);
+        audioLeft.add(R.raw.lonely);
+        audioLeft.add(R.raw.intentions);
 
         // Right side
 
@@ -102,6 +113,16 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         artworkRight.add("dare");
         artworkRight.add("sex");
         artworkRight.add("swim_for_your_life");
+        // SET UP RIGHT AUDIO
+        audioRight = new ArrayList<>();
+        audioRight.add(R.raw.shescasual);
+        audioRight.add(R.raw.someoneyouloved);
+        audioRight.add(R.raw.human);
+        audioRight.add(R.raw.dare);
+        audioRight.add(R.raw.sex);
+        audioRight.add(R.raw.swimforyourlife);
+
+
 
         if (settingsObject == null) {
             settingsObject = new ArrayList<>();
@@ -114,12 +135,12 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
 
         leftSideView = findViewById(R.id.leftSideView);
         leftSideView.setLayoutManager(new LinearLayoutManager(this));
-        adapterLeft = new SongAdapter(this,songsLeft,artistsLeft,artworkLeft,settingsObject);
+        adapterLeft = new SongAdapter(this,songsLeft,artistsLeft,artworkLeft,settingsObject, audioLeft);
         leftSideView.setAdapter(adapterLeft);
 
         rightSideView = findViewById(R.id.rightSideView);
         rightSideView.setLayoutManager(new LinearLayoutManager(this));
-        adapterRight = new SongAdapter(this,songsRight,artistsRight,artworkRight,settingsObject);
+        adapterRight = new SongAdapter(this,songsRight,artistsRight,artworkRight,settingsObject, audioRight);
         rightSideView.setAdapter(adapterRight);
 
     }

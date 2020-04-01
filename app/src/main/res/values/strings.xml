@@ -48,4 +48,6 @@
     <string name="background_option">Background Colour</string>
     <string name="save_settings">Save Settings</string>
     <string name="defaultSettings">Default Settings</string>
+    <string name="app_label">Default Settings</string>
+    <string name="hint">Default Settings</string>
 </resources>

@@ -30,16 +30,18 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     private List<String> artists;
     private List<String> artworks;
     private List<String> settings;
+    private List<Integer> audios;
 
 
 
-    SongAdapter(Context context, List<String> titles, List<String> artists, List<String> artworks, List<String> settings) {
+    SongAdapter(Context context, List<String> titles, List<String> artists, List<String> artworks, List<String> settings, List<Integer> audio) {
         this.layoutInflater = LayoutInflater.from(context);
         this.titles = titles;
         this.artists = artists;
         this.artworks = artworks;
         this.context = context;
         this.settings = settings;
+        this.audios = audio;
     }
 
     @NonNull
@@ -61,6 +63,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
         String artist = artists.get(i);
         viewHolder.textArtist.setText(artist);
+
+        Integer audio = audios.get(i);
 
         String artwork = artworks.get(i);
         int resourceId = context.getResources().getIdentifier(artwork,"drawable", SecondActivity.PACKAGE_NAME);
@@ -88,6 +92,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                     i.putExtra("title",titles.get(getAdapterPosition()));
                     i.putExtra("artist",artists.get(getAdapterPosition()));
                     i.putExtra("artwork",artworks.get(getAdapterPosition()));
+                    i.putExtra("audio", audios.get(getAdapterPosition()));
                     i.putExtra("settings", (Serializable) settings);
                     v.getContext().startActivity(i);
                 }

@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
                 skipLoginActivity();
             }
         });
+
+
     }
 
     private void goToLoginActivity() {
