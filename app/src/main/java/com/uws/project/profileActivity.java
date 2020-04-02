@@ -3,7 +3,9 @@ package com.uws.project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -28,6 +30,15 @@ public class profileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+// TODO PLEASE HELP ME!!!!
+        // GET VALUES TO PASS.
+        // https://stackoverflow.com/questions/2091465/how-do-i-pass-data-between-activities-in-android-application is where I got info for this.
+        // LINES 37 - 39 derived from this code.
+        // DOES NOT PASS CORRECTLY, RECEIVE ONLY NULLS
+        String user = getIntent().getStringExtra("EXTRA_SESSION_ID");
+
+        username = user;
+
         setTitle(username);
 
         // Placeholder code for testing
@@ -53,7 +64,7 @@ public class profileActivity extends AppCompatActivity {
         titles[0].setText("Blinding Lights");
         artists[0] = findViewById(R.id.detailArtist1);
         artists[0].setText("Weeknd");
-        resourceId = getResources().getIdentifier("blinding_lights","drawable",getPackageName());
+        resourceId = getResources().getIdentifier("blinding_lights", "drawable", getPackageName());
         artworks[0] = findViewById(R.id.detailArtwork1);
         artworks[0].setImageResource(resourceId);
 
@@ -61,7 +72,7 @@ public class profileActivity extends AppCompatActivity {
         titles[1].setText("Human");
         artists[1] = findViewById(R.id.detailArtist2);
         artists[1].setText("The Killers");
-        resourceId = getResources().getIdentifier("human","drawable",getPackageName());
+        resourceId = getResources().getIdentifier("human", "drawable", getPackageName());
         artworks[1] = findViewById(R.id.detailArtwork2);
         artworks[1].setImageResource(resourceId);
 
@@ -69,7 +80,7 @@ public class profileActivity extends AppCompatActivity {
         titles[2].setText("She's Casual");
         artists[2] = findViewById(R.id.detailArtist3);
         artists[2].setText("The Hunna");
-        resourceId = getResources().getIdentifier("shes_casual","drawable",getPackageName());
+        resourceId = getResources().getIdentifier("shes_casual", "drawable", getPackageName());
         artworks[2] = findViewById(R.id.detailArtwork3);
         artworks[2].setImageResource(resourceId);
 
@@ -78,7 +89,7 @@ public class profileActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
-        setResult(2,intent);
+        setResult(2, intent);
         finish();
     }
 
@@ -86,4 +97,9 @@ public class profileActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
-}
+
+
+
+    }
+
+

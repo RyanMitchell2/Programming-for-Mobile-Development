@@ -6,8 +6,6 @@ import android.view.View;
 import android.os.Bundle;
 import android.widget.Button;
 
-import com.uws.project.ui.login.LoginActivity;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override

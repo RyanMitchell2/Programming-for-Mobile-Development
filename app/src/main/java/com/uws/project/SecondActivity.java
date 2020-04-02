@@ -22,6 +22,9 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
     ArrayList<String> songsLeft, artistsLeft, artworkLeft, songsRight, artistsRight, artworkRight;
     ArrayList<String> settingsObject;
     ArrayList<Integer> audioLeft, audioRight;
+    String username;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,12 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         setContentView(R.layout.activity_second);
         setTitle("Main Page");
         PACKAGE_NAME = getApplicationContext().getPackageName();
-
+        // TODO PLEASE HELP ME!!!!
+        // GET VALUES TO PASS.
+        // https://stackoverflow.com/questions/2091465/how-do-i-pass-data-between-activities-in-android-application is where I got info for this.
+        // LINES 40, 160 - 161 derived from this code.
+        // DOES NOT PASS CORRECTLY, RECEIVE ONLY NULLS
+        username = getIntent().getStringExtra("USERNAME");
         // Profile button
         ImageButton profile_button = findViewById(R.id.profile);
         profile_button.setOnClickListener(new View.OnClickListener() {
@@ -146,7 +154,17 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
     }
 
     private void goToProfileActivity() {
-        Intent intent = new Intent(this, profileActivity.class);
+
+// TODO PLEASE HELP ME!!!!
+        // GET VALUES TO PASS.
+        // https://stackoverflow.com/questions/2091465/how-do-i-pass-data-between-activities-in-android-application is where I got info for this.
+        // LINES 160 - 161 derived from this code.
+        // DOES NOT PASS CORRECTLY, RECEIVE ONLY NULLS
+
+
+        Intent intent = new Intent(getBaseContext(), profileActivity.class);
+        intent.putExtra("USERNAME", username);
+
         startActivity(intent);
     }
 
