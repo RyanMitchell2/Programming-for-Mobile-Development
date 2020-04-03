@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goToSecondActivity() {
 
-        String biography = "Hi, my name is " + username + ". \n Welcome to my Profile! \n Just got the app recently, looking forward to it!";
+        String biography = "Go to settings to change your biography";
         String[] comments = {"Good music taste!", "Had the pleasure of meeting " + username + " at a charity do once. They were surprisingly down to earth, and VERY funny.","Don't really like your music taste."};
         int[] songs = {0,6,10};
 

@@ -31,7 +31,7 @@ public class Profile implements Parcelable {
         return picture;
     }
 
-    public String getUsername() {
+    String getUsername() {
         return username;
     }
 
@@ -50,19 +50,23 @@ public class Profile implements Parcelable {
         return password;
     }
 
-    public String getBiography() {
+    String getBiography() {
         return biography;
     }
 
-    public String[] getComments() {
+    void setBiography(String biography) {
+        this.biography = biography;
+    }
+
+    String[] getComments() {
         return comments;
     }
 
-    public int[] getSongs() {
+    int[] getSongs() {
         return songs;
     }
 
-    public void setSongs(int[] songs) {
+    void setSongs(int[] songs) {
         this.songs = songs;
     }
 

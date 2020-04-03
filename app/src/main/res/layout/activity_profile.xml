@@ -88,7 +88,7 @@
                     android:fontFamily="@font/source_sans_pro_light"
                     android:padding="8dp"
                     android:scrollHorizontally="false"
-                    android:text="@string/placeholder"
+                    android:text="@string/biography_prompt"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
 
