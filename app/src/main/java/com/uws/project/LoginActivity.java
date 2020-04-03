@@ -31,13 +31,20 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 password = editPassword.getText().toString();
                 username = editUsername.getText().toString();
-                goToSecondActivity();
-                String usernameWelcome = "Welcome " + username + "!";
-                Context context = getApplicationContext();
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, usernameWelcome, duration);
-                toast.show();
+                if (username.equals("") || password.equals("")) {
+                    Context context = getApplicationContext();
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, "Username and Password must have a value", duration);
+                    toast.show();
+                } else {
 
+                    goToSecondActivity();
+                    String usernameWelcome = "Welcome " + username + "!";
+                    Context context = getApplicationContext();
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, usernameWelcome, duration);
+                    toast.show();
+                }
             }
 
         });
@@ -46,7 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     private void goToSecondActivity() {
 
         String biography = "Hi, my name is " + username + ". \n Welcome to my Profile! \n Just got the app recently, looking forward to it!";
-        String[] comments = {"Good music taste!", "Had the pleasure of meeting " + username + " at a charity do once. He was surprisingly down to earth, and VERY funny.","Don't really like your music taste."};
+        String[] comments = {"Good music taste!", "Had the pleasure of meeting " + username + " at a charity do once. They were surprisingly down to earth, and VERY funny.","Don't really like your music taste."};
         int[] songs = {0,1,2};
 
         currentUser = new Profile(0,0, username, password, biography, comments, songs);

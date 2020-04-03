@@ -43,6 +43,13 @@ public class Profile implements Parcelable {
         return password;
     }
 
+    public String changePassword() {
+        String newPassword;
+        newPassword = "placeholder";
+        password = newPassword;
+        return password;
+    }
+
     public String getBiography() {
         return biography;
     }

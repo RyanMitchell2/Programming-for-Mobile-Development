@@ -1,10 +1,14 @@
 package com.uws.project;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,6 +46,7 @@ public class profileActivity extends AppCompatActivity {
         usernameText = findViewById(R.id.usernameText);
         usernameText.setText(currentUser.getUsername());
 
+
         biographyText = findViewById(R.id.bioText);
         biographyText.setText(currentUser.getBiography());
 
@@ -53,6 +58,20 @@ public class profileActivity extends AppCompatActivity {
 
         comments[2] = findViewById(R.id.commentText3);
         comments[2].setText(currentUser.getComments()[2]);
+
+
+// CHANGE PASSWORD BUTTON
+//        Button changePasswordButton = findViewById(R.id.changePassword);
+//        changePasswordButton.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                currentUser.changePassword();
+//                Context context = getApplicationContext();
+//                int duration = Toast.LENGTH_SHORT;
+//                Toast toast = Toast.makeText(context, currentUser.changePassword(), duration);
+//                toast.show();
+//            }
+//            });
+
 
 //        titles[0] = findViewById(R.id.detailTitle1);
 //        titles[0].setText(currentUser.getTitles()[0]);
@@ -80,6 +99,7 @@ public class profileActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
@@ -94,6 +114,7 @@ public class profileActivity extends AppCompatActivity {
 
 
 
-    }
+
+}
 
 
