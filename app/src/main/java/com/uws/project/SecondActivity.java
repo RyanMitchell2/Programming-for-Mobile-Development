@@ -34,11 +34,11 @@ public class SecondActivity extends AppCompatActivity {
         if (extras != null) {
             currentUser = extras.getParcelable("user_details");
 
-            Context context = getApplicationContext();
-            CharSequence announcement = "second toast:" + " " + " " + currentUser.getUsername();
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, announcement, duration);
-            toast.show();
+//            Context context = getApplicationContext();
+//            CharSequence announcement = "second toast:" + " " + " " + currentUser.getUsername();
+//            int duration = Toast.LENGTH_SHORT;
+//            Toast toast = Toast.makeText(context, announcement, duration);
+//            toast.show();
         }
 
         // Profile button

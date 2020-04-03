@@ -15,18 +15,21 @@ public class LoginActivity extends AppCompatActivity {
     EditText editUsername;
     String username;
     Profile currentUser;
+    EditText editPassword;
+    String password;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        EditText passwordEditText = findViewById(R.id.password);
+        editPassword = findViewById(R.id.password);
         editUsername = findViewById(R.id.username);
 
         Button loginButton = findViewById(R.id.login);
         loginButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                password = editPassword.getText().toString();
                 username = editUsername.getText().toString();
                 goToSecondActivity();
                 String usernameWelcome = "Welcome " + username + "!";
@@ -43,9 +46,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goToSecondActivity() {
 
-        String password = "temp password";
-        String biography = "Placeholder biography";
-        String[] comments = {"comment 1","comment 2","comment 3"};
+
+        String biography = "Hi, my name is " + username + ". \n Welcome to my Profile! \n Just got the app recently, looking forward to it!";
+        String[] comments = {"Good music taste!", "Had the pleasure of meeting " + username + " at a charity do once. He was surprisingly down to earth, and VERY funny.","Don't really like your music taste."};
         int[] songs = {0,1,2};
 
         currentUser = new Profile(0,0, username, password, biography, comments, songs);
