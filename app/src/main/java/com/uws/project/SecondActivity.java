@@ -23,6 +23,8 @@ public class SecondActivity extends AppCompatActivity {
     Profile currentUser;
     int song_id, array_pos;
 
+    String[][] comments = new String[][]{{},{},{},{},{},{},{},{},{},{},{},{}};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,26 +53,26 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
-        ArrayList<Song> updateSongs = new ArrayList<>();
-        initialiseSongs(updateSongs);
+        String[][] comments = new String[][]{{},{},{},{},{},{},{},{},{},{},{},{}};
+        initialiseSongs(comments);
 
     }
 
-    private void initialiseSongs(ArrayList<Song> updateSongs) {
+    private void initialiseSongs(String[][] comments) {
 
-        Song song1 = new Song(0,0,"Blinding Lights","Weeknd","blinding_lights",R.raw.blindinglights, fetchComments(0,updateSongs));
-        Song song2 = new Song(1,1,"Say So","Doja Cat","say_so",R.raw.sayso, fetchComments(1,updateSongs));
-        Song song3 = new Song(2,2,"Don't Start Now","Dua Lipa","dont_start_now",R.raw.dontstartnow, fetchComments(2,updateSongs));
-        Song song4 = new Song(3,3,"No Time To Die","Billie Eilish","no_time_to_die",R.raw.notimetodie, fetchComments(3,updateSongs));
-        Song song5 = new Song(4,4,"Lonely","Joel Corry","lonely",R.raw.lonely, fetchComments(4,updateSongs));
-        Song song6 = new Song(5,5,"Intentions","Justin Bieber","intentions",R.raw.intentions, fetchComments(5,updateSongs));
+        Song song1 = new Song(0,0,"Blinding Lights","Weeknd","blinding_lights",R.raw.blindinglights, fetchComments(0, comments));
+        Song song2 = new Song(1,1,"Say So","Doja Cat","say_so",R.raw.sayso, fetchComments(1,comments));
+        Song song3 = new Song(2,2,"Don't Start Now","Dua Lipa","dont_start_now",R.raw.dontstartnow, fetchComments(2,comments));
+        Song song4 = new Song(3,3,"No Time To Die","Billie Eilish","no_time_to_die",R.raw.notimetodie, fetchComments(3,comments));
+        Song song5 = new Song(4,4,"Lonely","Joel Corry","lonely",R.raw.lonely, fetchComments(4,comments));
+        Song song6 = new Song(5,5,"Intentions","Justin Bieber","intentions",R.raw.intentions, fetchComments(5,comments));
 
-        Song song7 = new Song(6,0,"She's Casual","The Hunna","shes_casual",R.raw.shescasual, fetchComments(0,updateSongs));
-        Song song8 = new Song(7,1,"Someone You Loved","Lewis Capaldi","someone_you_loved",R.raw.someoneyouloved, fetchComments(1,updateSongs));
-        Song song9 = new Song(8,2,"Human","The Killers","human",R.raw.human, fetchComments(2,updateSongs));
-        Song song10 = new Song(9,3,"Dare","The Hunna","dare",R.raw.dare, fetchComments(3,updateSongs));
-        Song song11 = new Song(10,4,"Sex","The 1975","sex",R.raw.sex, fetchComments(4,updateSongs));
-        Song song12 = new Song(11,5,"Swim For Your Life","The Pale White","swim_for_your_life",R.raw.swimforyourlife, fetchComments(5,updateSongs));
+        Song song7 = new Song(6,0,"She's Casual","The Hunna","shes_casual",R.raw.shescasual, fetchComments(6,comments));
+        Song song8 = new Song(7,1,"Someone You Loved","Lewis Capaldi","someone_you_loved",R.raw.someoneyouloved, fetchComments(7,comments));
+        Song song9 = new Song(8,2,"Human","The Killers","human",R.raw.human, fetchComments(8,comments));
+        Song song10 = new Song(9,3,"Dare","The Hunna","dare",R.raw.dare, fetchComments(9,comments));
+        Song song11 = new Song(10,4,"Sex","The 1975","sex",R.raw.sex, fetchComments(10,comments));
+        Song song12 = new Song(11,5,"Swim For Your Life","The Pale White","swim_for_your_life",R.raw.swimforyourlife, fetchComments(11,comments));
 
         leftSongs = new ArrayList<>();
         leftSongs.add(song1);
@@ -106,12 +108,11 @@ public class SecondActivity extends AppCompatActivity {
 
     }
 
-    private String[] fetchComments(int pos, ArrayList<Song> updateSongs) {
-        if (updateSongs.isEmpty()) {
-            return new String[]{};
-        } else {
-            return updateSongs.get(pos).getComments();
+    private String[] fetchComments(int index, String[][] comments) {
+        if (comments[index] == null) {
+            comments[index] = new String[]{String.valueOf(index)};
         }
+        return comments[index];
     }
 
     private void initialiseAdapter() {
@@ -164,10 +165,11 @@ public class SecondActivity extends AppCompatActivity {
             ArrayList<Song> updateSongs = data.getParcelableArrayListExtra("songs");
             settingsObject = data.getStringArrayListExtra("settings");
             currentUser = data.getParcelableExtra("user_details");
-            song_id = data.getIntExtra("song_id",1);
+            song_id = data.getIntExtra("song_id",0);
             array_pos = data.getIntExtra("array_pos",0);
 
-            initialiseSongs(updateSongs);
+            comments[song_id] = updateSongs.get(array_pos).getComments();
+            initialiseSongs(comments);
         }
     }
 
