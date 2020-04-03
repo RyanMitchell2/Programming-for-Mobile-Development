@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class DetailsActivity extends AppCompatActivity {
@@ -36,6 +38,13 @@ public class DetailsActivity extends AppCompatActivity {
     ArrayList<Song> songs;
     Profile currentUser;
 
+    int song_id;
+    String title;
+    String artist;
+    String artwork;
+    Integer audio;
+    String[] comments;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,23 +54,17 @@ public class DetailsActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            songs = extras.getParcelable("songs");
+            songs = extras.getParcelableArrayList("songs");
             settingsObject = extras.getStringArrayList("settings");
             currentUser = extras.getParcelable("user_details");
-            int song_id = extras.getInt("song_id");
-            String title = extras.getString("title");
-            String artist = extras.getString("artist");
-            String artwork = extras.getString("artwork");
-            Integer audio = extras.getInt("audio");
-            String[] comments = extras.getStringArray("comments");
+            song_id = extras.getInt("song_id");
+            title = extras.getString("title");
+            artist = extras.getString("artist");
+            artwork = extras.getString("artwork");
+            audio = extras.getInt("audio");
+            comments = extras.getStringArray("comments");
 
             setTitle(title + " by " + artist);
-
-            Context context = getApplicationContext();
-            int duration = Toast.LENGTH_SHORT;
-            CharSequence announcement = "details toast:" + " " + settingsObject;
-            Toast toast = Toast.makeText(context, announcement, duration);
-            toast.show();
 
             playButton = findViewById(R.id.playButton);
             pauseButton = findViewById(R.id.pauseButton);
@@ -97,10 +100,8 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void initialiseComments() {
-
         comments_body = new ArrayList<>();
-        comments_body.add("1 - comment text would be here ahaha haha i hope this works yo");
-        comments_body.add("2 - comment text would be here ahaha haha i hope this works yo");
+        comments_body.addAll(Arrays.asList(comments));
 
         commentsRecycler = findViewById(R.id.commentsRecycler);
         commentsRecycler.setLayoutManager(new LinearLayoutManager(this));
@@ -109,11 +110,17 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void postComment() {
+
         editComment = findViewById(R.id.editComment);
         String current_text = editComment.getText().toString();
         if (!current_text.equals("") && comments_body != null) {
             comments_body.add(current_text);
+            List<String> list = new ArrayList<>(Arrays.asList(comments));
+            list.add(current_text);
+            comments = list.toArray(new String[]{});
+            songs.get(song_id).setComments(comments);
         }
+
         commentsRecycler = findViewById(R.id.commentsRecycler);
         commentsRecycler.setLayoutManager(new LinearLayoutManager(this));
         commentAdapter = new CommentAdapter(this,comments_body);
@@ -228,7 +235,11 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
-        setResult(2,intent);
+        intent.putExtra("songs", songs);
+        intent.putExtra("settings", settingsObject);
+        intent.putExtra("user_details", currentUser);
+        intent.putExtra("song_id", songs.get(song_id).getSong_id());
+        setResult(3,intent);
         finish();
     }
 

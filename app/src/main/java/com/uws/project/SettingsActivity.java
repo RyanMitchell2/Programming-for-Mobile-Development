@@ -43,8 +43,8 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            currentUser = extras.getParcelable("user_details");
             settingsObject = extras.getStringArrayList("settings");
+            currentUser = extras.getParcelable("user_details");
         }
 
         addItemsOnSpinners();
@@ -192,8 +192,8 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
     private void defaultSettings() {
         settingsObject = null;
         Intent intent = new Intent();
-        intent.putExtra("user_details", currentUser);
         intent.putExtra("settings", settingsObject);
+        intent.putExtra("user_details", currentUser);
         setResult(2,intent);
         finish();
     }
@@ -201,8 +201,8 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
-        intent.putExtra("user_details", currentUser);
         intent.putExtra("settings", settingsObject);
+        intent.putExtra("user_details", currentUser);
         setResult(2,intent);
         finish();
     }

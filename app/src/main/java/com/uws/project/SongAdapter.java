@@ -1,5 +1,6 @@
 package com.uws.project;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -75,7 +76,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     currentSong = songs.get(getAdapterPosition());
-                    Intent i = new Intent(v.getContext(), DetailsActivity.class);
+                    Intent i = new Intent(context, DetailsActivity.class);
                     i.putExtra("songs", songs);
                     i.putExtra("settings", (Serializable) settings);
                     i.putExtra("user_details", currentUser);
@@ -85,7 +86,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                     i.putExtra("artwork",currentSong.getArtwork());
                     i.putExtra("audio", currentSong.getAudio());
                     i.putExtra("comments", currentSong.getComments());
-                    v.getContext().startActivity(i);
+                    int resultCode = 3;
+                    ((Activity) context).startActivityForResult(i, resultCode);
                 }
             });
             textTitle = itemView.findViewById(R.id.textTitle);

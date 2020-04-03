@@ -45,6 +45,10 @@ public class Song implements Parcelable {
         return comments;
     }
 
+    public void setComments(String[] comments) {
+        this.comments = comments;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(song_id);
