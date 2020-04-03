@@ -17,11 +17,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     private Context context;
     private LayoutInflater layoutInflater;
     private List<String> comments_body;
+    private String username;
 
-    public CommentAdapter(Context context, List<String> comments_body) {
+    public CommentAdapter(Context context, List<String> comments_body, String username) {
         this.layoutInflater = LayoutInflater.from(context);
         this.context = context;
         this.comments_body = comments_body;
+        this.username = username;
     }
 
     @NonNull
@@ -33,7 +35,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        String body = comments_body.get(position);
+        String body = username + ": " + comments_body.get(position);
         viewHolder.commentBody.setText(body);
     }
 

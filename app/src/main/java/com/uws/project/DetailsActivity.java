@@ -3,6 +3,7 @@ package com.uws.project;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -152,7 +154,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         commentsRecycler = findViewById(R.id.commentsRecycler);
         commentsRecycler.setLayoutManager(new LinearLayoutManager(this));
-        commentAdapter = new CommentAdapter(this,comments_body);
+        commentAdapter = new CommentAdapter(this,comments_body, currentUser.getUsername());
         commentsRecycler.setAdapter(commentAdapter);
     }
 
@@ -170,7 +172,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         commentsRecycler = findViewById(R.id.commentsRecycler);
         commentsRecycler.setLayoutManager(new LinearLayoutManager(this));
-        commentAdapter = new CommentAdapter(this,comments_body);
+        commentAdapter = new CommentAdapter(this,comments_body, currentUser.getUsername());
         commentsRecycler.setAdapter(commentAdapter);
     }
 
@@ -244,8 +246,13 @@ public class DetailsActivity extends AppCompatActivity {
 
         int selection;
 
-//        String[] style_placeholders = {"Light", "Regular", "Semi-bold", "Bold", "Black"};
-//        String[] style_values = {"Light", "Regular", "Semi-bold", "Bold", "Black"};
+        String[] style_placeholders = {"Light", "Regular", "Semi-bold", "Bold", "Black"};
+        String[] style_values = {"source_sans_pro_light", "source_sans_pro", "source_sans_pro_semibold", "source_sans_pro_bold", "source_sans_pro_black"};
+        selection = getSavedSetting(style_placeholders,0);
+
+        int typefaceID = getResources().getIdentifier(style_values[selection],"font",getPackageName());
+        Typeface typeface = ResourcesCompat.getFont(context, typefaceID);
+        textLyrics.setTypeface(typeface);
 
         String[] colour_placeholders = {"White","Black","Grey","Red","Orange","Yellow","Green","Blue","Indigo", "Violet"};
         String[] colour_values = {"#FFFFFF","#000000","#303030","#FF0000","#FF7F00","#FFFF00","#00FF00","#0000FF","#4B0082","#9400D3"};
