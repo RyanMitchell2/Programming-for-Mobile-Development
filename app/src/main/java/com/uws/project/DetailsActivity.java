@@ -29,7 +29,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     MediaPlayer player;
     Context context;
-    Button playButton, pauseButton, stopButton;
+    Button playButton, pauseButton, stopButton, likeButton;
 
     RecyclerView commentsRecycler;
     CommentAdapter commentAdapter;
@@ -44,6 +44,12 @@ public class DetailsActivity extends AppCompatActivity {
     String artwork;
     Integer audio;
     String[] comments;
+
+    int[] current_liked;
+    int song1;
+    int song2;
+    int song3;
+    int[] new_liked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,12 @@ public class DetailsActivity extends AppCompatActivity {
             playButton = findViewById(R.id.playButton);
             pauseButton = findViewById(R.id.pauseButton);
             stopButton = findViewById(R.id.stopButton);
+
+            likeButton = findViewById(R.id.likeButton);
+            current_liked = currentUser.getSongs();
+            song1 = current_liked[0];
+            song2 = current_liked[1];
+            song3 = current_liked[2];
 
             textTitle = findViewById(R.id.detailTitle);
             textTitle.setText(title);
@@ -98,6 +110,40 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
+        // Like button
+
+        if (song_id == song1) {
+            new_liked = new int[]{song1, song2, song3};
+            likeButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            likeButton.setTextColor(Color.parseColor("#303030"));
+            likeButton.setText(R.string.liked);
+        } else if (song_id == song2) {
+            new_liked = new int[]{song2, song1, song3};
+            likeButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            likeButton.setTextColor(Color.parseColor("#303030"));
+            likeButton.setText(R.string.liked);
+        } else if (song_id == song3) {
+            new_liked = new int[]{song3, song1, song2};
+            likeButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            likeButton.setTextColor(Color.parseColor("#303030"));
+            likeButton.setText(R.string.liked);
+        } else {
+            new_liked = new int[]{song_id, song1, song2};
+        }
+
+        likeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                likeSong();
+            }
+        });
+    }
+
+    public void likeSong() {
+
+        likeButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        likeButton.setTextColor(Color.parseColor("#303030"));
+        likeButton.setText(R.string.liked);
+        currentUser.setSongs(new_liked);
     }
 
     public void initialiseComments() {

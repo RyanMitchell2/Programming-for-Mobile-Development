@@ -62,6 +62,10 @@ public class Profile implements Parcelable {
         return songs;
     }
 
+    public void setSongs(int[] songs) {
+        this.songs = songs;
+    }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(user_id);

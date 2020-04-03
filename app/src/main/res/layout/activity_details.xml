@@ -34,9 +34,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/detailArtwork"
             app:layout_constraintTop_toTopOf="parent">
@@ -247,14 +245,30 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:layout_marginEnd="6dp"
                 android:background="#303030"
                 android:fontFamily="@font/source_sans_pro_bold"
                 android:text="@string/post_comment"
                 android:textAllCaps="true"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/likeButton"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/writeCommentBox" />
+
+            <Button
+                android:id="@+id/likeButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="12dp"
+                android:background="#303030"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:text="@string/like"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/postButton"
                 app:layout_constraintTop_toBottomOf="@+id/writeCommentBox" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

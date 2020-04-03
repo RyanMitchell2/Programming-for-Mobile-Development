@@ -173,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/source_sans_pro_black"
                     android:padding="8dp"
-                    android:text="@string/liked"
+                    android:text="@string/top_liked"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
