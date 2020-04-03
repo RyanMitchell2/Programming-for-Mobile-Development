@@ -38,7 +38,7 @@ public class DetailsActivity extends AppCompatActivity {
     ArrayList<Song> songs;
     Profile currentUser;
 
-    int song_id;
+    int song_id, array_pos;
     String title;
     String artist;
     String artwork;
@@ -58,6 +58,7 @@ public class DetailsActivity extends AppCompatActivity {
             settingsObject = extras.getStringArrayList("settings");
             currentUser = extras.getParcelable("user_details");
             song_id = extras.getInt("song_id");
+            array_pos = extras.getInt("array_pos");
             title = extras.getString("title");
             artist = extras.getString("artist");
             artwork = extras.getString("artwork");
@@ -118,7 +119,7 @@ public class DetailsActivity extends AppCompatActivity {
             List<String> list = new ArrayList<>(Arrays.asList(comments));
             list.add(current_text);
             comments = list.toArray(new String[]{});
-            songs.get(song_id).setComments(comments);
+            songs.get(array_pos).setComments(comments);
         }
 
         commentsRecycler = findViewById(R.id.commentsRecycler);
@@ -238,7 +239,8 @@ public class DetailsActivity extends AppCompatActivity {
         intent.putExtra("songs", songs);
         intent.putExtra("settings", settingsObject);
         intent.putExtra("user_details", currentUser);
-        intent.putExtra("song_id", songs.get(song_id).getSong_id());
+        intent.putExtra("song_id", songs.get(array_pos).getSong_id());
+        intent.putExtra("array_pos", songs.get(array_pos).getArray_pos());
         setResult(3,intent);
         finish();
     }

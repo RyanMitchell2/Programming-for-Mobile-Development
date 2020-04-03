@@ -41,11 +41,9 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
-
     }
 
     private void goToSecondActivity() {
-
 
         String biography = "Hi, my name is " + username + ". \n Welcome to my Profile! \n Just got the app recently, looking forward to it!";
         String[] comments = {"Good music taste!", "Had the pleasure of meeting " + username + " at a charity do once. He was surprisingly down to earth, and VERY funny.","Don't really like your music taste."};

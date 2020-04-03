@@ -6,14 +6,16 @@ import android.os.Parcelable;
 public class Song implements Parcelable {
 
     private int song_id;
+    private int array_pos;
     private String title;
     private String artist;
     private String artwork;
     private Integer audio;
     private String[] comments;
 
-    Song(int song_id, String username, String artist, String artwork, Integer audio, String[] comments) {
+    Song(int song_id, int array_pos, String username, String artist, String artwork, Integer audio, String[] comments) {
         this.song_id = song_id;
+        this.array_pos = array_pos;
         this.title = username;
         this.artist = artist;
         this.artwork = artwork;
@@ -23,6 +25,10 @@ public class Song implements Parcelable {
 
     public int getSong_id() {
         return song_id;
+    }
+
+    public int getArray_pos() {
+        return array_pos;
     }
 
     public String getTitle() {
@@ -52,6 +58,7 @@ public class Song implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(song_id);
+        dest.writeInt(array_pos);
         dest.writeString(title);
         dest.writeString(artist);
         dest.writeString(artwork);
@@ -61,6 +68,7 @@ public class Song implements Parcelable {
 
     private Song(Parcel parcel) {
         song_id = parcel.readInt();
+        array_pos = parcel.readInt();
         title = parcel.readString();
         artist = parcel.readString();
         artwork = parcel.readString();

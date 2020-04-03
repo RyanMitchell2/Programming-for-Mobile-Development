@@ -81,6 +81,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                     i.putExtra("settings", (Serializable) settings);
                     i.putExtra("user_details", currentUser);
                     i.putExtra("song_id",currentSong.getSong_id());
+                    i.putExtra("array_pos",currentSong.getArray_pos());
                     i.putExtra("title",currentSong.getTitle());
                     i.putExtra("artist",currentSong.getArtist());
                     i.putExtra("artwork",currentSong.getArtwork());
