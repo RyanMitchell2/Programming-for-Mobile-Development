@@ -1,24 +1,18 @@
 package com.uws.project;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,22 +20,17 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     private Context context;
     private LayoutInflater layoutInflater;
-    private List<String> titles;
-    private List<String> artists;
-    private List<String> artworks;
+    private ArrayList<Song> songs;
     private List<String> settings;
-    private List<Integer> audios;
+    private Profile currentUser;
+    private Song currentSong;
 
-
-
-    SongAdapter(Context context, List<String> titles, List<String> artists, List<String> artworks, List<String> settings, List<Integer> audio) {
+    SongAdapter(Context context, ArrayList<Song> songs, List<String> settings, Profile currentUser) {
         this.layoutInflater = LayoutInflater.from(context);
-        this.titles = titles;
-        this.artists = artists;
-        this.artworks = artworks;
         this.context = context;
+        this.songs = songs;
         this.settings = settings;
-        this.audios = audio;
+        this.currentUser = currentUser;
     }
 
     @NonNull
@@ -51,22 +40,20 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
-
-
-
-
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
-        String title = titles.get(i);
+        currentSong = songs.get(i);
+
+        String title = currentSong.getTitle();
         viewHolder.textTitle.setText(title);
 
-        String artist = artists.get(i);
+        String artist = currentSong.getArtist();
         viewHolder.textArtist.setText(artist);
 
-        Integer audio = audios.get(i);
+        Integer audio = currentSong.getAudio();
 
-        String artwork = artworks.get(i);
+        String artwork = currentSong.getArtwork();
         int resourceId = context.getResources().getIdentifier(artwork,"drawable", SecondActivity.PACKAGE_NAME);
         viewHolder.imageAlbum.setImageResource(resourceId);
 
@@ -74,26 +61,30 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return titles.size();
+        return songs.size();
     }
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView textTitle, textArtist;
         ImageView imageAlbum;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    currentSong = songs.get(getAdapterPosition());
                     Intent i = new Intent(v.getContext(), DetailsActivity.class);
-                    i.putExtra("title",titles.get(getAdapterPosition()));
-                    i.putExtra("artist",artists.get(getAdapterPosition()));
-                    i.putExtra("artwork",artworks.get(getAdapterPosition()));
-                    i.putExtra("audio", audios.get(getAdapterPosition()));
+                    i.putExtra("songs", songs);
                     i.putExtra("settings", (Serializable) settings);
+                    i.putExtra("user_details", currentUser);
+                    i.putExtra("song_id",currentSong.getSong_id());
+                    i.putExtra("title",currentSong.getTitle());
+                    i.putExtra("artist",currentSong.getArtist());
+                    i.putExtra("artwork",currentSong.getArtwork());
+                    i.putExtra("audio", currentSong.getAudio());
+                    i.putExtra("comments", currentSong.getComments());
                     v.getContext().startActivity(i);
                 }
             });
@@ -104,6 +95,5 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         }
 
     }
-
 
 }

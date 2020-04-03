@@ -87,7 +87,7 @@
             android:background="#FFD81B60"
             android:enabled="true"
             android:fontFamily="@font/source_sans_pro_semibold"
-            android:text="@string/action_sign_in"
+            android:text="@string/action_sign_in_short"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"

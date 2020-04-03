@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/source_sans_pro_black"
                     android:padding="8dp"
-                    android:text="@string/comments"
+                    android:text="@string/top_comments"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp" />
 
@@ -178,7 +178,7 @@
                     android:textSize="20sp" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/likedSong1"
+                    android:id="@+id/likedSongLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"

@@ -3,16 +3,13 @@ package com.uws.project;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,14 +21,12 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
     Spinner styleSpinner, colourSpinner, sizeSpinner, speedSpinner, backgroundSpinner;
     ArrayList<String> settingsObject;
     int testPOS = 0;
-
-
+    Profile currentUser;
 
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,17 +43,18 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
+            currentUser = extras.getParcelable("user_details");
             settingsObject = extras.getStringArrayList("settings");
         }
 
         addItemsOnSpinners();
 
         final Button save_button = findViewById(R.id.saveButton);
-            save_button.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    saveSettings();
-                }
-            });
+        save_button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                saveSettings();
+            }
+        });
 
         final Button default_button = findViewById(R.id.defaultButton);
         default_button.setOnClickListener(new View.OnClickListener() {
@@ -68,9 +64,6 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
         });
 
     }
-
-
-
 
     // set spinner defaults
     public void setSpinnerDefaults() {
@@ -123,10 +116,15 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
 
         List<String> colourList = new ArrayList<>();
         colourList.add("White");
+        colourList.add("Black");
+        colourList.add("Grey");
         colourList.add("Red");
-        colourList.add("Blue");
-        colourList.add("Green");
+        colourList.add("Orange");
         colourList.add("Yellow");
+        colourList.add("Green");
+        colourList.add("Blue");
+        colourList.add("Indigo");
+        colourList.add("Violet");
         ArrayAdapter<String> colourAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, colourList);
         colourAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         colourSpinner.setAdapter(colourAdapter);
@@ -155,9 +153,13 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
         backgroundList.add("White");
         backgroundList.add("Black");
         backgroundList.add("Grey");
-        backgroundList.add("Blue");
         backgroundList.add("Red");
+        backgroundList.add("Orange");
         backgroundList.add("Yellow");
+        backgroundList.add("Green");
+        backgroundList.add("Blue");
+        backgroundList.add("Indigo");
+        backgroundList.add("Violet");
         ArrayAdapter<String> backgroundAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, backgroundList);
         backgroundAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         backgroundSpinner.setAdapter(backgroundAdapter);
@@ -181,6 +183,7 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
         settingsObject.add((String) background_option);
 
         Intent intent = new Intent();
+        intent.putExtra("user_details", currentUser);
         intent.putExtra("settings", settingsObject);
         setResult(2,intent);
         finish();
@@ -189,6 +192,7 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
     private void defaultSettings() {
         settingsObject = null;
         Intent intent = new Intent();
+        intent.putExtra("user_details", currentUser);
         intent.putExtra("settings", settingsObject);
         setResult(2,intent);
         finish();
@@ -197,6 +201,7 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
     @Override
     public void onBackPressed() {
         Intent intent = new Intent();
+        intent.putExtra("user_details", currentUser);
         intent.putExtra("settings", settingsObject);
         setResult(2,intent);
         finish();

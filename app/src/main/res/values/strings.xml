@@ -32,7 +32,7 @@
     <string name="placeholder">Placeholder Text</string>
     <string name="settings">Settings</string>
     <string name="biography">My Biography</string>
-    <string name="comments">Top Comments</string>
+    <string name="top_comments">Top Comments</string>
     <string name="liked">Top Liked Songs</string>
     <string name="charts">Top Charts</string>
     <string name="favourites">Your Favourites</string>
@@ -50,4 +50,10 @@
     <string name="defaultSettings">Default Settings</string>
     <string name="app_label">Default Settings</string>
     <string name="hint">Default Settings</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
+    <string name="comments">Comments</string>
+    <string name="post_comment">Post Comment</string>
+    <string name="enter_comment">Enter Comment Here</string>
 </resources>

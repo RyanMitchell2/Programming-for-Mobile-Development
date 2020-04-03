@@ -3,17 +3,18 @@ package com.uws.project;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -22,9 +23,18 @@ public class DetailsActivity extends AppCompatActivity {
 
     TextView textTitle, textArtist, textLyrics;
     ImageView imageAlbum;
-    ArrayList<String> settingsObject;
+    ArrayList<String> settingsObject, comments_body;
+
     MediaPlayer player;
     Context context;
+    Button playButton, pauseButton, stopButton;
+
+    RecyclerView commentsRecycler;
+    CommentAdapter commentAdapter;
+    EditText editComment;
+
+    ArrayList<Song> songs;
+    Profile currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +45,27 @@ public class DetailsActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
+            songs = extras.getParcelable("songs");
+            settingsObject = extras.getStringArrayList("settings");
+            currentUser = extras.getParcelable("user_details");
+            int song_id = extras.getInt("song_id");
             String title = extras.getString("title");
             String artist = extras.getString("artist");
             String artwork = extras.getString("artwork");
-            settingsObject = extras.getStringArrayList("settings");
+            Integer audio = extras.getInt("audio");
+            String[] comments = extras.getStringArray("comments");
+
+            setTitle(title + " by " + artist);
 
             Context context = getApplicationContext();
-            CharSequence announcement = title + " by " + artist;
             int duration = Toast.LENGTH_SHORT;
+            CharSequence announcement = "details toast:" + " " + settingsObject;
             Toast toast = Toast.makeText(context, announcement, duration);
             toast.show();
-            setTitle(announcement);
 
-            announcement = "details toast:" + " " + settingsObject;
-            duration = Toast.LENGTH_SHORT;
-            toast = Toast.makeText(context, announcement, duration);
-            toast.show();
+            playButton = findViewById(R.id.playButton);
+            pauseButton = findViewById(R.id.pauseButton);
+            stopButton = findViewById(R.id.stopButton);
 
             textTitle = findViewById(R.id.detailTitle);
             textTitle.setText(title);
@@ -62,19 +77,47 @@ public class DetailsActivity extends AppCompatActivity {
             imageAlbum = findViewById(R.id.detailArtwork);
             imageAlbum.setImageResource(albumID);
 
-
-
             int lyricID = getResources().getIdentifier(artwork,"string",getPackageName());
             textLyrics = findViewById(R.id.detailLyrics);
             textLyrics.setText(lyricID);
+
             lyricsAppearance();
-
-
-
-
+            initialiseComments();
 
         }
 
+        // Comment button
+        Button postButton = findViewById(R.id.postButton);
+        postButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                postComment();
+            }
+        });
+
+    }
+
+    public void initialiseComments() {
+
+        comments_body = new ArrayList<>();
+        comments_body.add("1 - comment text would be here ahaha haha i hope this works yo");
+        comments_body.add("2 - comment text would be here ahaha haha i hope this works yo");
+
+        commentsRecycler = findViewById(R.id.commentsRecycler);
+        commentsRecycler.setLayoutManager(new LinearLayoutManager(this));
+        commentAdapter = new CommentAdapter(this,comments_body);
+        commentsRecycler.setAdapter(commentAdapter);
+    }
+
+    public void postComment() {
+        editComment = findViewById(R.id.editComment);
+        String current_text = editComment.getText().toString();
+        if (!current_text.equals("") && comments_body != null) {
+            comments_body.add(current_text);
+        }
+        commentsRecycler = findViewById(R.id.commentsRecycler);
+        commentsRecycler.setLayoutManager(new LinearLayoutManager(this));
+        commentAdapter = new CommentAdapter(this,comments_body);
+        commentsRecycler.setAdapter(commentAdapter);
     }
 
     public void play (View v){
@@ -95,19 +138,45 @@ public class DetailsActivity extends AppCompatActivity {
             });
         }
         player.start();
+
+        // SET PLAY TO WHITE, PAUSE AND STOP TO GREY
+        playButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        playButton.setTextColor(Color.parseColor("#303030"));
+        pauseButton.setBackgroundColor(Color.parseColor("#303030"));
+        pauseButton.setTextColor(Color.parseColor("#FFFFFF"));
+        stopButton.setBackgroundColor(Color.parseColor("#303030"));
+        stopButton.setTextColor(Color.parseColor("#FFFFFF"));
     }
     public void pause (View v){
         if (player != null) {
             player.pause();
+
+            // SET PAUSE TO WHITE, PLAY AND STOP TO GREY
+            pauseButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            pauseButton.setTextColor(Color.parseColor("#303030"));
+            playButton.setBackgroundColor(Color.parseColor("#303030"));
+            playButton.setTextColor(Color.parseColor("#FFFFFF"));
+            stopButton.setBackgroundColor(Color.parseColor("#303030"));
+            stopButton.setTextColor(Color.parseColor("#FFFFFF"));
         }
     }
+
     public void stop (View v) {
         stopPlayer();
     }
+
     private void stopPlayer() {
         if (player != null){
             player.release();
             player = null;
+
+            // SET STOP TO WHITE, PLAY AND PAUSE TO GREY
+            stopButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            stopButton.setTextColor(Color.parseColor("#303030"));
+            playButton.setBackgroundColor(Color.parseColor("#303030"));
+            playButton.setTextColor(Color.parseColor("#FFFFFF"));
+            pauseButton.setBackgroundColor(Color.parseColor("#303030"));
+            pauseButton.setTextColor(Color.parseColor("#FFFFFF"));
         }
     }
 
@@ -124,8 +193,8 @@ public class DetailsActivity extends AppCompatActivity {
 //        String[] style_placeholders = {"Light", "Regular", "Semi-bold", "Bold", "Black"};
 //        String[] style_values = {"Light", "Regular", "Semi-bold", "Bold", "Black"};
 
-        String[] colour_placeholders = {"White","Red","Blue","Green","Yellow"};
-        String[] colour_values = {"#FFFFFF","#ff0000","#0048ff","#00ff1e","#fffb00"};
+        String[] colour_placeholders = {"White","Black","Grey","Red","Orange","Yellow","Green","Blue","Indigo", "Violet"};
+        String[] colour_values = {"#FFFFFF","#000000","#303030","#FF0000","#FF7F00","#FFFF00","#00FF00","#0000FF","#4B0082","#9400D3"};
         selection = getSavedSetting(colour_placeholders, 1);
         textLyrics.setTextColor(Color.parseColor(colour_values[selection]));
 
@@ -137,13 +206,14 @@ public class DetailsActivity extends AppCompatActivity {
 //        Double[] speed_placeholders = {0.5,0.75,1.0,1.25,1.5};
 //        Double[] speed_values = {0.5,0.75,1.0,1.25,1.5};
 
-        String[] background_placeholders = {"White","Black","Grey","Blue","Red","Yellow"};
-        String[] background_values = {"#FFFFFF","#000000","#303030","#0048ff","#00ff1e","#fffb00"};
+        String[] background_placeholders = {"White","Black","Grey","Red","Orange","Yellow","Green","Blue","Indigo", "Violet"};
+        String[] background_values = {"#FFFFFF","#000000","#303030","#FF0000","#FF7F00","#FFFF00","#00FF00","#0000FF","#4B0082","#9400D3"};
         selection = getSavedSetting(background_placeholders, 4);
         textLyrics.setBackgroundColor(Color.parseColor(background_values[selection]));
 
     }
-// GETTING THE SETTINGS THAT HAVE BEEN SAVED PREVIOUSLY
+
+    // GETTING THE SETTINGS THAT HAVE BEEN SAVED PREVIOUSLY
     private int getSavedSetting(String[] placeholders, int position){
         int index = 0;
         for (int i=0;i<placeholders.length;i++){
@@ -153,6 +223,7 @@ public class DetailsActivity extends AppCompatActivity {
         }
         return index;
     }
+
     // BACK BUTTON CODE
     @Override
     public void onBackPressed() {
@@ -165,6 +236,5 @@ public class DetailsActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
-
 
 }

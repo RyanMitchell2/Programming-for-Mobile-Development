@@ -11,20 +11,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class SecondActivity extends AppCompatActivity implements Serializable {
+public class SecondActivity extends AppCompatActivity {
 
     public static String PACKAGE_NAME;
     RecyclerView leftSideView, rightSideView;
     SongAdapter adapterLeft, adapterRight;
-    ArrayList<String> songsLeft, artistsLeft, artworkLeft, songsRight, artistsRight, artworkRight;
     ArrayList<String> settingsObject;
-    ArrayList<Integer> audioLeft, audioRight;
-    String username;
-
-
+    ArrayList<Song> leftSongs, rightSongs;
+    Profile currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +29,18 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
         setContentView(R.layout.activity_second);
         setTitle("Main Page");
         PACKAGE_NAME = getApplicationContext().getPackageName();
-        // TODO PLEASE HELP ME!!!!
-        // GET VALUES TO PASS.
-        // https://stackoverflow.com/questions/2091465/how-do-i-pass-data-between-activities-in-android-application is where I got info for this.
-        // LINES 40, 160 - 161 derived from this code.
-        // DOES NOT PASS CORRECTLY, RECEIVE ONLY NULLS
-        username = getIntent().getStringExtra("USERNAME");
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            currentUser = extras.getParcelable("user_details");
+
+            Context context = getApplicationContext();
+            CharSequence announcement = "second toast:" + " " + " " + currentUser.getUsername();
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, announcement, duration);
+            toast.show();
+        }
+
         // Profile button
         ImageButton profile_button = findViewById(R.id.profile);
         profile_button.setOnClickListener(new View.OnClickListener() {
@@ -54,83 +57,11 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
             }
         });
 
-        initialiseAdapater();
-
-
+        initialiseAdapter();
 
     }
 
-    private void initialiseAdapater() {
-
-        // Left side
-
-        songsLeft = new ArrayList<>();
-        songsLeft.add("Blinding Lights");
-        songsLeft.add("Say So");
-        songsLeft.add("Don't Start Now");
-        songsLeft.add("No Time To Die");
-        songsLeft.add("Lonely");
-        songsLeft.add("Intentions");
-
-        artistsLeft = new ArrayList<>();
-        artistsLeft.add("Weeknd");
-        artistsLeft.add("Doja Cat");
-        artistsLeft.add("Dua Lipa");
-        artistsLeft.add("Billie Eilish");
-        artistsLeft.add("Joel Corry");
-        artistsLeft.add("Justin Bieber");
-
-        artworkLeft = new ArrayList<>();
-        artworkLeft.add("blinding_lights");
-        artworkLeft.add("say_so");
-        artworkLeft.add("dont_start_now");
-        artworkLeft.add("no_time_to_die");
-        artworkLeft.add("lonely");
-        artworkLeft.add("intentions");
-    // SET UP LEFT AUDIO
-        audioLeft = new ArrayList<>();
-        audioLeft.add(R.raw.blindinglights);
-        audioLeft.add(R.raw.sayso);
-        audioLeft.add(R.raw.dontstartnow);
-        audioLeft.add(R.raw.notimetodie);
-        audioLeft.add(R.raw.lonely);
-        audioLeft.add(R.raw.intentions);
-
-        // Right side
-
-        songsRight = new ArrayList<>();
-        songsRight.add("She's Casual");
-        songsRight.add("Someone You Loved");
-        songsRight.add("Human");
-        songsRight.add("Dare");
-        songsRight.add("Sex");
-        songsRight.add("Swim For Your Life");
-
-        artistsRight = new ArrayList<>();
-        artistsRight.add("The Hunna");
-        artistsRight.add("Lewis Capaldi");
-        artistsRight.add("The Killers");
-        artistsRight.add("The Hunna");
-        artistsRight.add("The 1975");
-        artistsRight.add("The Pale White");
-
-        artworkRight = new ArrayList<>();
-        artworkRight.add("shes_casual");
-        artworkRight.add("someone_you_loved");
-        artworkRight.add("human");
-        artworkRight.add("dare");
-        artworkRight.add("sex");
-        artworkRight.add("swim_for_your_life");
-        // SET UP RIGHT AUDIO
-        audioRight = new ArrayList<>();
-        audioRight.add(R.raw.shescasual);
-        audioRight.add(R.raw.someoneyouloved);
-        audioRight.add(R.raw.human);
-        audioRight.add(R.raw.dare);
-        audioRight.add(R.raw.sex);
-        audioRight.add(R.raw.swimforyourlife);
-
-
+    private void initialiseAdapter() {
 
         if (settingsObject == null) {
             settingsObject = new ArrayList<>();
@@ -141,58 +72,78 @@ public class SecondActivity extends AppCompatActivity implements Serializable {
             settingsObject.add("Grey");
         }
 
+        Song song1 = new Song(1,"Blinding Lights","Weeknd","blinding_lights",R.raw.blindinglights, new String[]{"Weeknd rocks", "comment2"});
+        Song song2 = new Song(2,"Say So","Doja Cat","say_so",R.raw.sayso, new String[]{"Doja rocks", "comment2"});
+        Song song3 = new Song(3,"Don't Start Now","Dua Lipa","dont_start_now",R.raw.dontstartnow, new String[]{"Dua rocks", "comment2"});
+        Song song4 = new Song(4,"No Time To Die","Billie Eilish","no_time_to_die",R.raw.notimetodie, new String[]{"Billie rocks", "comment2"});
+        Song song5 = new Song(5,"Lonely","Joel Corry","lonely",R.raw.lonely, new String[]{"Lonely rocks", "comment2"});
+        Song song6 = new Song(6,"Intentions","Justin Bieber","intentions",R.raw.intentions, new String[]{"Justin rocks", "comment2"});
+
+        Song song7 = new Song(7,"She's Casual","The Hunna","shes_casual",R.raw.shescasual, new String[]{"Hunna rocks", "comment2"});
+        Song song8 = new Song(8,"Someone You Loved","Lewis Capaldi","someone_you_loved",R.raw.someoneyouloved, new String[]{"Lewis rocks", "comment2"});
+        Song song9 = new Song(9,"Human","The Killers","human",R.raw.human, new String[]{"Killers rocks", "comment2"});
+        Song song10 = new Song(10,"Dare","The Hunna","dare",R.raw.dare, new String[]{"Hunna rocks", "comment2"});
+        Song song11 = new Song(11,"Sex","The 1975","sex",R.raw.sex, new String[]{"1975 rocks", "comment2"});
+        Song song12 = new Song(12,"Swim For Your Life","The Pale White","swim_for_your_life",R.raw.swimforyourlife, new String[]{"Pale rocks", "comment2"});
+
+        leftSongs = new ArrayList<>();
+        leftSongs.add(song1);
+        leftSongs.add(song2);
+        leftSongs.add(song3);
+        leftSongs.add(song4);
+        leftSongs.add(song5);
+        leftSongs.add(song6);
+
+        rightSongs = new ArrayList<>();
+        rightSongs.add(song7);
+        rightSongs.add(song8);
+        rightSongs.add(song9);
+        rightSongs.add(song10);
+        rightSongs.add(song11);
+        rightSongs.add(song12);
+
         leftSideView = findViewById(R.id.leftSideView);
         leftSideView.setLayoutManager(new LinearLayoutManager(this));
-        adapterLeft = new SongAdapter(this,songsLeft,artistsLeft,artworkLeft,settingsObject, audioLeft);
+        adapterLeft = new SongAdapter(this, leftSongs, settingsObject, currentUser);
         leftSideView.setAdapter(adapterLeft);
 
         rightSideView = findViewById(R.id.rightSideView);
         rightSideView.setLayoutManager(new LinearLayoutManager(this));
-        adapterRight = new SongAdapter(this,songsRight,artistsRight,artworkRight,settingsObject, audioRight);
+        adapterRight = new SongAdapter(this, rightSongs, settingsObject, currentUser);
         rightSideView.setAdapter(adapterRight);
 
     }
 
     private void goToProfileActivity() {
-
-// TODO PLEASE HELP ME!!!!
-        // GET VALUES TO PASS.
-        // https://stackoverflow.com/questions/2091465/how-do-i-pass-data-between-activities-in-android-application is where I got info for this.
-        // LINES 160 - 161 derived from this code.
-        // DOES NOT PASS CORRECTLY, RECEIVE ONLY NULLS
-
-
-        Intent intent = new Intent(getBaseContext(), profileActivity.class);
-        intent.putExtra("USERNAME", username);
-
+        Intent intent = new Intent(this, profileActivity.class);
+        intent.putExtra("user_details", currentUser);
         startActivity(intent);
     }
 
     private void goToSettingsActivity() {
         int resultCode = 2;
         Intent intent = new Intent(this,SettingsActivity.class);
+        intent.putExtra("user_details", currentUser);
         intent.putExtra("settings", settingsObject);
         startActivityForResult(intent, resultCode); // suppose resultCode == 2
     }
-
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 2) {
+            currentUser = data.getParcelableExtra("user_details");
             settingsObject = data.getStringArrayListExtra("settings");
-            initialiseAdapater();
+            initialiseAdapter();
 
             Context context = getApplicationContext();
-            CharSequence announcement = "second toast:" + " " + settingsObject;
+            CharSequence announcement = "second toast:" + " " + settingsObject + " " + currentUser.getUsername();
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, announcement, duration);
             toast.show();
         } else {
-            initialiseAdapater();
+            initialiseAdapter();
             Context context = getApplicationContext();
             CharSequence announcement = "second toast: bad result code";
             int duration = Toast.LENGTH_SHORT;
