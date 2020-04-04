@@ -88,19 +88,23 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     public void goToSearchFunction() {
-        String search_query = main_search.getQuery().toString();
+        CharSequence search_query = main_search.getQuery();
+        String search_result = String.valueOf(search_query).trim().replaceAll("\\W","").replaceAll("\\d","");
+
         boolean found = false;
-        
+
         if (allSongs.size() == 12 && leftSongs.size() == 6 && rightSongs.size() == 6) {
             for (int index=0;index<allSongs.size();index++) {
-                if (allSongs.get(index).getTitle().equalsIgnoreCase(search_query) || allSongs.get(index).getArtist().equalsIgnoreCase(search_query)) {
+                String current_title = allSongs.get(index).getTitle().trim().replaceAll("\\W","").replaceAll("\\d","");
+                String current_artist = allSongs.get(index).getArtist().trim().replaceAll("\\W","").replaceAll("\\d","");
+                if (current_title.equalsIgnoreCase(search_result) || current_artist.equalsIgnoreCase(search_result)) {
                     leftSongs.clear();
                     rightSongs.clear();
                     leftSongs.add(allSongs.get(index));
                     found = true;
                     checker = "yes";
                     initialiseAdapter();
-                    Toast toast = Toast.makeText(getApplicationContext(), "Found song: " + search_query, Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getApplicationContext(), allSongs.get(index).getTitle() + " by " + allSongs.get(index).getArtist(), Toast.LENGTH_SHORT);
                     toast.show();
                 } else {
                     checker = "no";
