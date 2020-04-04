@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     private void goToSecondActivity() {
         String biography = "Hi, my name is " + username + "! Welcome to my profile! Just got the app recently, looking forward to using it!";
         String[] comments = {"Good music taste!", "Had the pleasure of meeting AlanB73 at a charity do once. They were surprisingly down to earth, and VERY funny.","Don't really like your music taste."};
-        int[] songs = {0,6,10};
+        int[] songs = {0,1,2};
 
         currentUser = new Profile(0,R.drawable.account, username, password, biography, comments, songs);
 

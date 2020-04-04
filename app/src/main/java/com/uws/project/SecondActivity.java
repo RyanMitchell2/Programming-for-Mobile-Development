@@ -1,16 +1,22 @@
 package com.uws.project;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class SecondActivity extends AppCompatActivity {
 
@@ -22,6 +28,7 @@ public class SecondActivity extends AppCompatActivity {
     Profile currentUser;
     int song_id, array_pos;
     String[][] comments = new String[][]{{},{},{},{},{},{},{},{},{},{},{},{}};
+    List<Integer> random_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +42,12 @@ public class SecondActivity extends AppCompatActivity {
             currentUser = extras.getParcelable("user_details");
         }
 
+        // Generate random list of 10 unique numbers 0-9
+        random_list = new ArrayList<>();
+        for (int index = 0; index < 12; index++)
+            random_list.add(index);
+        Collections.shuffle(random_list);
+
         // Profile button
         ImageButton profile_button = findViewById(R.id.profile);
         profile_button.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +55,7 @@ public class SecondActivity extends AppCompatActivity {
                 goToProfileActivity();
             }
         });
+
 
         // Profile button
         ImageButton settings_button = findViewById(R.id.settings);
@@ -58,39 +72,35 @@ public class SecondActivity extends AppCompatActivity {
 
     private void initialiseSongs(String[][] comments) {
 
-        Song song1 = new Song(0,0,"Blinding Lights","Weeknd",R.drawable.blinding_lights,R.raw.blindinglights, R.string.blinding_lights, fetchComments(0, comments));
-        Song song2 = new Song(1,1,"Say So","Doja Cat",R.drawable.say_so,R.raw.sayso, R.string.say_so, fetchComments(1,comments));
-        Song song3 = new Song(2,2,"Don't Start Now","Dua Lipa",R.drawable.dont_start_now,R.raw.dontstartnow, R.string.say_so, fetchComments(2,comments));
-        Song song4 = new Song(3,3,"No Time To Die","Billie Eilish",R.drawable.no_time_to_die,R.raw.notimetodie, R.string.no_time_to_die, fetchComments(3,comments));
-        Song song5 = new Song(4,4,"Lonely","Joel Corry",R.drawable.lonely,R.raw.lonely, R.string.lonely, fetchComments(4,comments));
-        Song song6 = new Song(5,5,"Intentions","Justin Bieber",R.drawable.intentions,R.raw.intentions, R.string.intentions, fetchComments(5,comments));
+        String[] song_titles = {"Blinding Lights","Say So","Don't Start Now","No Time To Die","Lonely","Intentions","She's Casual","Someone You Loved","Human","Dare","Sex","Swim For Your Life"};
+        String[] song_artists = {"Weeknd","Doja Cat","Dua Lipa","Billie Eilish","Joel Corry","Justin Bieber","The Hunna","Lewis Capaldi","The Killers","The Hunna","The 1975","The Pale White"};
+        int[] song_artworks = {R.drawable.blinding_lights,R.drawable.say_so,R.drawable.dont_start_now,R.drawable.no_time_to_die,R.drawable.lonely,R.drawable.intentions,R.drawable.shes_casual,R.drawable.someone_you_loved,R.drawable.human,R.drawable.dare,R.drawable.sex,R.drawable.swim_for_your_life};
+        int[] song_audios = {R.raw.blindinglights,R.raw.sayso,R.raw.dontstartnow,R.raw.notimetodie,R.raw.lonely,R.raw.intentions,R.raw.shescasual,R.raw.someoneyouloved,R.raw.human,R.raw.dare,R.raw.sex,R.raw.swimforyourlife};
+        int[] song_lyrics = {R.string.blinding_lights,R.string.say_so,R.string.dont_start_now,R.string.no_time_to_die,R.string.lonely,R.string.intentions,R.string.shes_casual,R.string.someone_you_loved,R.string.human,R.string.dare,R.string.sex,R.string.swim_for_your_life};
+        int count = song_titles.length;
+        Song[] songs_array = new Song[count];
+        int index;
 
-        Song song7 = new Song(6,0,"She's Casual","The Hunna",R.drawable.shes_casual,R.raw.shescasual, R.string.shes_casual, fetchComments(6,comments));
-        Song song8 = new Song(7,1,"Someone You Loved","Lewis Capaldi",R.drawable.someone_you_loved,R.raw.someoneyouloved, R.string.someone_you_loved, fetchComments(7,comments));
-        Song song9 = new Song(8,2,"Human","The Killers",R.drawable.human,R.raw.human, R.string.human, fetchComments(8,comments));
-        Song song10 = new Song(9,3,"Dare","The Hunna",R.drawable.dare,R.raw.dare, R.string.dare, fetchComments(9,comments));
-        Song song11 = new Song(10,4,"Sex","The 1975",R.drawable.sex,R.raw.sex, R.string.sex, fetchComments(10,comments));
-        Song song12 = new Song(11,5,"Swim For Your Life","The Pale White",R.drawable.swim_for_your_life,R.raw.swimforyourlife, R.string.swim_for_your_life, fetchComments(11,comments));
+        for (index=0;index<count;index++) {
+            songs_array[index] = new Song(index,index,song_titles[index],song_artists[index],song_artworks[index],song_audios[index],song_lyrics[index],fetchComments(index,comments));
+        }
 
         leftSongs = new ArrayList<>();
-        leftSongs.add(song1);
-        leftSongs.add(song2);
-        leftSongs.add(song3);
-        leftSongs.add(song4);
-        leftSongs.add(song5);
-        leftSongs.add(song6);
-
         rightSongs = new ArrayList<>();
-        rightSongs.add(song7);
-        rightSongs.add(song8);
-        rightSongs.add(song9);
-        rightSongs.add(song10);
-        rightSongs.add(song11);
-        rightSongs.add(song12);
-
         allSongs = new ArrayList<>();
-        allSongs.addAll(leftSongs);
-        allSongs.addAll(rightSongs);
+
+        for (index = 0; index < count; index++) {
+            allSongs.add(songs_array[index]);
+            if (leftSongs.size() < 6) {
+                Song current_song = songs_array[random_list.get(index)];
+                current_song.setArray_pos(index);
+                leftSongs.add(current_song);
+            } else {
+                Song current_song = songs_array[random_list.get(index)];
+                current_song.setArray_pos(index - 6);
+                rightSongs.add(current_song);
+            }
+        }
 
         initialiseAdapter();
 

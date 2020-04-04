@@ -74,11 +74,6 @@ public class DetailsActivity extends AppCompatActivity {
         stopButton = findViewById(R.id.stopButton);
         likeButton = findViewById(R.id.likeButton);
 
-        current_liked = currentUser.getSongs();
-        song1 = current_liked[0];
-        song2 = current_liked[1];
-        song3 = current_liked[2];
-
         textTitle = findViewById(R.id.detailTitle);
         textTitle.setText(title);
 
@@ -103,6 +98,11 @@ public class DetailsActivity extends AppCompatActivity {
         });
 
         // Like stuff
+        current_liked = currentUser.getSongs();
+        song1 = current_liked[0];
+        song2 = current_liked[1];
+        song3 = current_liked[2];
+
         if (song_id == song1) {
             new_liked = new int[]{song1, song2, song3};
             likeButton.setBackgroundColor(Color.parseColor("#FFFFFF"));

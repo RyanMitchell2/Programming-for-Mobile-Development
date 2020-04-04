@@ -46,10 +46,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
         currentSong = songs.get(i);
 
-        String title = currentSong.getTitle();
+        String title = currentSong.getTitle() + " " + currentSong.getSong_id();
         viewHolder.textTitle.setText(title);
 
-        String artist = currentSong.getArtist();
+        String artist = currentSong.getArtist() + " " + currentSong.getArray_pos();
         viewHolder.textArtist.setText(artist);
 
         Integer artwork = currentSong.getArtwork();
