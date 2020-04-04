@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -105,17 +106,17 @@ public class DetailsActivity extends AppCompatActivity {
 
         if (song_id == song1) {
             new_liked = new int[]{song1, song2, song3};
-            likeButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            likeButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.whiteBackground));
             likeButton.setTextColor(Color.parseColor("#303030"));
             likeButton.setText(R.string.liked);
         } else if (song_id == song2) {
             new_liked = new int[]{song2, song1, song3};
-            likeButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            likeButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.whiteBackground));
             likeButton.setTextColor(Color.parseColor("#303030"));
             likeButton.setText(R.string.liked);
         } else if (song_id == song3) {
             new_liked = new int[]{song3, song1, song2};
-            likeButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            likeButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.whiteBackground));
             likeButton.setTextColor(Color.parseColor("#303030"));
             likeButton.setText(R.string.liked);
         } else {
@@ -168,7 +169,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void likeSong() {
-        likeButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        likeButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.whiteBackground));
         likeButton.setTextColor(Color.parseColor("#303030"));
         likeButton.setText(R.string.liked);
         currentUser.setSongs(new_liked);
@@ -187,11 +188,11 @@ public class DetailsActivity extends AppCompatActivity {
         player.start();
 
         // SET PLAY TO WHITE, PAUSE AND STOP TO GREY
-        playButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        playButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.whiteBackground));
         playButton.setTextColor(Color.parseColor("#303030"));
-        pauseButton.setBackgroundColor(Color.parseColor("#303030"));
+        pauseButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.greyLight));
         pauseButton.setTextColor(Color.parseColor("#FFFFFF"));
-        stopButton.setBackgroundColor(Color.parseColor("#303030"));
+        stopButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.greyLight));
         stopButton.setTextColor(Color.parseColor("#FFFFFF"));
     }
     public void pause (View v){
@@ -199,11 +200,11 @@ public class DetailsActivity extends AppCompatActivity {
             player.pause();
 
             // SET PAUSE TO WHITE, PLAY AND STOP TO GREY
-            pauseButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            pauseButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.whiteBackground));
             pauseButton.setTextColor(Color.parseColor("#303030"));
-            playButton.setBackgroundColor(Color.parseColor("#303030"));
+            playButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.greyLight));
             playButton.setTextColor(Color.parseColor("#FFFFFF"));
-            stopButton.setBackgroundColor(Color.parseColor("#303030"));
+            stopButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.greyLight));
             stopButton.setTextColor(Color.parseColor("#FFFFFF"));
         }
     }
@@ -218,11 +219,11 @@ public class DetailsActivity extends AppCompatActivity {
             player = null;
 
             // SET STOP TO WHITE, PLAY AND PAUSE TO GREY
-            stopButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            stopButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.whiteBackground));
             stopButton.setTextColor(Color.parseColor("#303030"));
-            playButton.setBackgroundColor(Color.parseColor("#303030"));
+            playButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.greyLight));
             playButton.setTextColor(Color.parseColor("#FFFFFF"));
-            pauseButton.setBackgroundColor(Color.parseColor("#303030"));
+            pauseButton.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.greyLight));
             pauseButton.setTextColor(Color.parseColor("#FFFFFF"));
         }
     }

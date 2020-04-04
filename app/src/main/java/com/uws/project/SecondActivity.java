@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import java.util.List;
 public class SecondActivity extends AppCompatActivity {
 
     public static String PACKAGE_NAME;
+    TextView leftSideText, rightSideText;
     RecyclerView leftSideView, rightSideView;
     SongAdapter adapterLeft, adapterRight;
     ArrayList<String> settingsObject;
@@ -42,7 +44,10 @@ public class SecondActivity extends AppCompatActivity {
             currentUser = extras.getParcelable("user_details");
         }
 
-        // Generate random list of 10 unique numbers 0-9
+        leftSideText = findViewById(R.id.leftSideText);
+        rightSideText = findViewById(R.id.rightSideText);
+
+        // Generate random list of 12 unique numbers 0-11
         random_list = new ArrayList<>();
         for (int index = 0; index < 12; index++)
             random_list.add(index);
@@ -55,7 +60,6 @@ public class SecondActivity extends AppCompatActivity {
                 goToProfileActivity();
             }
         });
-
 
         // Profile button
         ImageButton settings_button = findViewById(R.id.settings);
@@ -91,8 +95,6 @@ public class SecondActivity extends AppCompatActivity {
         CharSequence search_query = main_search.getQuery();
         String search_result = String.valueOf(search_query).trim().replaceAll("\\W","").replaceAll("\\d","");
 
-        boolean found = false;
-
         if (allSongs.size() == 12 && leftSongs.size() == 6 && rightSongs.size() == 6) {
             for (int index=0;index<allSongs.size();index++) {
                 String current_title = allSongs.get(index).getTitle().trim().replaceAll("\\W","").replaceAll("\\d","");
@@ -101,20 +103,17 @@ public class SecondActivity extends AppCompatActivity {
                     leftSongs.clear();
                     rightSongs.clear();
                     leftSongs.add(allSongs.get(index));
-                    found = true;
                     checker = "yes";
+                    leftSideText.setText(R.string.search_results);
+                    rightSideText.setText(R.string.blank_string);
                     initialiseAdapter();
                     Toast toast = Toast.makeText(getApplicationContext(), allSongs.get(index).getTitle() + " by " + allSongs.get(index).getArtist(), Toast.LENGTH_SHORT);
                     toast.show();
-                } else {
-                    checker = "no";
-                    found = false;
                 }
             }
-            if (!found) {
-                checker = "no";
-            }
         } else {
+            leftSideText.setText(R.string.charts);
+            rightSideText.setText(R.string.favourites);
             String[][] comments = new String[][]{{},{},{},{},{},{},{},{},{},{},{},{}};
             initialiseSongs(comments);
             goToSearchFunction();

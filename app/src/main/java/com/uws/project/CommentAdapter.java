@@ -35,7 +35,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
 
-        String body = username.toUpperCase() + ": " + comments_body.get(position);
+        String body = username + ": " + comments_body.get(position);
         if (comments_body.get(0).equals("No comments yet") && comments_body.size() == 1) {
             body = comments_body.get(position);
         }

@@ -83,74 +83,79 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <LinearLayout
-                android:id="@+id/buttonBarLayout"
-                style="?android:attr/buttonBarStyle"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/likedSongLayout">
 
                 <Button
-                    android:id="@+id/playButton"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/pauseButton"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#303030"
+                    android:backgroundTint="#303030"
                     android:fontFamily="@font/source_sans_pro_bold"
-                    android:onClick="play"
-                    android:text="@string/play"
+                    android:onClick="pause"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/pause"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
+                    app:layout_constraintEnd_toStartOf="@+id/stopButton"
+                    app:layout_constraintStart_toEndOf="@+id/playButton"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:layout_conversion_absoluteHeight="48dp"
                     tools:layout_conversion_absoluteWidth="88dp" />
 
                 <Button
-                    android:id="@+id/pauseButton"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/playButton"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:background="#303030"
+                    android:backgroundTint="#303030"
                     android:fontFamily="@font/source_sans_pro_bold"
-                    android:onClick="pause"
-                    android:text="@string/pause"
+                    android:onClick="play"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:text="@string/play"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
+                    app:layout_constraintEnd_toStartOf="@+id/pauseButton"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:layout_conversion_absoluteHeight="48dp"
                     tools:layout_conversion_absoluteWidth="88dp" />
 
                 <Button
                     android:id="@+id/stopButton"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="#303030"
+                    android:backgroundTint="#303030"
                     android:fontFamily="@font/source_sans_pro_bold"
                     android:onClick="stop"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
                     android:text="@string/stop"
                     android:textColor="#FFFFFF"
                     android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/pauseButton"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:layout_conversion_absoluteHeight="48dp"
                     tools:layout_conversion_absoluteWidth="88dp" />
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:id="@+id/lyricLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonBarLayout">
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
                 <TextView
                     android:id="@+id/detailLyrics"
@@ -241,8 +246,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="6dp"
-                android:background="#303030"
+                android:backgroundTint="#303030"
                 android:fontFamily="@font/source_sans_pro_bold"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
                 android:text="@string/post_comment"
                 android:textAllCaps="true"
                 android:textColor="#FFFFFF"
@@ -257,8 +264,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="12dp"
-                android:background="#303030"
+                android:backgroundTint="#303030"
                 android:fontFamily="@font/source_sans_pro_bold"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp"
                 android:text="@string/like"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
