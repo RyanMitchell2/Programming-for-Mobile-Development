@@ -25,13 +25,15 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     private List<String> settings;
     private Profile currentUser;
     private Song currentSong;
+    private String checker;
 
-    SongAdapter(Context context, ArrayList<Song> songs, List<String> settings, Profile currentUser) {
+    SongAdapter(Context context, ArrayList<Song> songs, List<String> settings, Profile currentUser, String checker) {
         this.layoutInflater = LayoutInflater.from(context);
         this.context = context;
         this.songs = songs;
         this.settings = settings;
         this.currentUser = currentUser;
+        this.checker = checker;
     }
 
     @NonNull
@@ -46,10 +48,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
         currentSong = songs.get(i);
 
-        String title = currentSong.getTitle() + " " + currentSong.getSong_id();
+        String title = currentSong.getTitle();
         viewHolder.textTitle.setText(title);
 
-        String artist = currentSong.getArtist() + " " + currentSong.getArray_pos();
+        String artist = currentSong.getArtist();
         viewHolder.textArtist.setText(artist);
 
         Integer artwork = currentSong.getArtwork();
@@ -74,6 +76,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                 public void onClick(View v) {
                     currentSong = songs.get(getAdapterPosition());
                     Intent i = new Intent(context, DetailsActivity.class);
+                    if (checker.equals("yes")) {
+                        currentSong.setArray_pos(0);
+                    }
                     i.putExtra("songs", songs);
                     i.putExtra("settings", (Serializable) settings);
                     i.putExtra("user_details", currentUser);

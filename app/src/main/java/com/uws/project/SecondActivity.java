@@ -1,12 +1,11 @@
 package com.uws.project;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,6 +27,8 @@ public class SecondActivity extends AppCompatActivity {
     int song_id, array_pos;
     String[][] comments = new String[][]{{},{},{},{},{},{},{},{},{},{},{},{}};
     List<Integer> random_list;
+    String checker = "no";
+    SearchView main_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +65,56 @@ public class SecondActivity extends AppCompatActivity {
             }
         });
 
+        // Search bar stuff
+        main_search = findViewById(R.id.mainSearch);
+        main_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                goToSearchFunction();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                goToSearchFunction();
+                return false;
+            }
+        });
+
+        checker = "no";
         String[][] comments = new String[][]{{},{},{},{},{},{},{},{},{},{},{},{}};
         initialiseSongs(comments);
 
+    }
+
+    public void goToSearchFunction() {
+        String search_query = main_search.getQuery().toString();
+        boolean found = false;
+        
+        if (allSongs.size() == 12 && leftSongs.size() == 6 && rightSongs.size() == 6) {
+            for (int index=0;index<allSongs.size();index++) {
+                if (allSongs.get(index).getTitle().equalsIgnoreCase(search_query) || allSongs.get(index).getArtist().equalsIgnoreCase(search_query)) {
+                    leftSongs.clear();
+                    rightSongs.clear();
+                    leftSongs.add(allSongs.get(index));
+                    found = true;
+                    checker = "yes";
+                    initialiseAdapter();
+                    Toast toast = Toast.makeText(getApplicationContext(), "Found song: " + search_query, Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    checker = "no";
+                    found = false;
+                }
+            }
+            if (!found) {
+                checker = "no";
+            }
+        } else {
+            String[][] comments = new String[][]{{},{},{},{},{},{},{},{},{},{},{},{}};
+            initialiseSongs(comments);
+            goToSearchFunction();
+        }
     }
 
     private void initialiseSongs(String[][] comments) {
@@ -91,12 +138,11 @@ public class SecondActivity extends AppCompatActivity {
 
         for (index = 0; index < count; index++) {
             allSongs.add(songs_array[index]);
+            Song current_song = songs_array[random_list.get(index)];
             if (leftSongs.size() < 6) {
-                Song current_song = songs_array[random_list.get(index)];
                 current_song.setArray_pos(index);
                 leftSongs.add(current_song);
             } else {
-                Song current_song = songs_array[random_list.get(index)];
                 current_song.setArray_pos(index - 6);
                 rightSongs.add(current_song);
             }
@@ -128,12 +174,12 @@ public class SecondActivity extends AppCompatActivity {
 
         leftSideView = findViewById(R.id.leftSideView);
         leftSideView.setLayoutManager(new LinearLayoutManager(this));
-        adapterLeft = new SongAdapter(this, leftSongs, settingsObject, currentUser);
+        adapterLeft = new SongAdapter(this, leftSongs, settingsObject, currentUser, checker);
         leftSideView.setAdapter(adapterLeft);
 
         rightSideView = findViewById(R.id.rightSideView);
         rightSideView.setLayoutManager(new LinearLayoutManager(this));
-        adapterRight = new SongAdapter(this, rightSongs, settingsObject, currentUser);
+        adapterRight = new SongAdapter(this, rightSongs, settingsObject, currentUser, checker);
         rightSideView.setAdapter(adapterRight);
 
     }
@@ -183,6 +229,9 @@ public class SecondActivity extends AppCompatActivity {
             if (updateSongs != null) {
                 comments[song_id] = updateSongs.get(array_pos).getComments();
             }
+            checker = "no";
+            main_search.setQuery("",false);
+            main_search.clearFocus();
             initialiseSongs(comments);
         }
     }

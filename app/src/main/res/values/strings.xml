@@ -61,4 +61,5 @@
     <string name="enter_comment">Enter Comment Here</string>
     <string name="like">Like Song</string>
     <string name="liked">Liked</string>
+    <string name="search">Search</string>
 </resources>
