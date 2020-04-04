@@ -52,11 +52,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         String artist = currentSong.getArtist();
         viewHolder.textArtist.setText(artist);
 
-        Integer audio = currentSong.getAudio();
-
-        String artwork = currentSong.getArtwork();
-        int resourceId = context.getResources().getIdentifier(artwork,"drawable", SecondActivity.PACKAGE_NAME);
-        viewHolder.imageAlbum.setImageResource(resourceId);
+        Integer artwork = currentSong.getArtwork();
+        viewHolder.imageAlbum.setImageResource(artwork);
 
     }
 
@@ -86,6 +83,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                     i.putExtra("artist",currentSong.getArtist());
                     i.putExtra("artwork",currentSong.getArtwork());
                     i.putExtra("audio", currentSong.getAudio());
+                    i.putExtra("lyrics", currentSong.getLyrics());
                     i.putExtra("comments", currentSong.getComments());
                     int resultCode = 3;
                     ((Activity) context).startActivityForResult(i, resultCode);

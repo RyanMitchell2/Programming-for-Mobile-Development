@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,12 +18,9 @@ public class SecondActivity extends AppCompatActivity {
     RecyclerView leftSideView, rightSideView;
     SongAdapter adapterLeft, adapterRight;
     ArrayList<String> settingsObject;
-    ArrayList<Song> leftSongs;
-    ArrayList<Song> rightSongs;
-    ArrayList<Song> allSongs;
+    ArrayList<Song> leftSongs, rightSongs, allSongs;
     Profile currentUser;
     int song_id, array_pos;
-
     String[][] comments = new String[][]{{},{},{},{},{},{},{},{},{},{},{},{}};
 
     @Override
@@ -60,19 +58,19 @@ public class SecondActivity extends AppCompatActivity {
 
     private void initialiseSongs(String[][] comments) {
 
-        Song song1 = new Song(0,0,"Blinding Lights","Weeknd","blinding_lights",R.raw.blindinglights, fetchComments(0, comments));
-        Song song2 = new Song(1,1,"Say So","Doja Cat","say_so",R.raw.sayso, fetchComments(1,comments));
-        Song song3 = new Song(2,2,"Don't Start Now","Dua Lipa","dont_start_now",R.raw.dontstartnow, fetchComments(2,comments));
-        Song song4 = new Song(3,3,"No Time To Die","Billie Eilish","no_time_to_die",R.raw.notimetodie, fetchComments(3,comments));
-        Song song5 = new Song(4,4,"Lonely","Joel Corry","lonely",R.raw.lonely, fetchComments(4,comments));
-        Song song6 = new Song(5,5,"Intentions","Justin Bieber","intentions",R.raw.intentions, fetchComments(5,comments));
+        Song song1 = new Song(0,0,"Blinding Lights","Weeknd",R.drawable.blinding_lights,R.raw.blindinglights, R.string.blinding_lights, fetchComments(0, comments));
+        Song song2 = new Song(1,1,"Say So","Doja Cat",R.drawable.say_so,R.raw.sayso, R.string.say_so, fetchComments(1,comments));
+        Song song3 = new Song(2,2,"Don't Start Now","Dua Lipa",R.drawable.dont_start_now,R.raw.dontstartnow, R.string.say_so, fetchComments(2,comments));
+        Song song4 = new Song(3,3,"No Time To Die","Billie Eilish",R.drawable.no_time_to_die,R.raw.notimetodie, R.string.no_time_to_die, fetchComments(3,comments));
+        Song song5 = new Song(4,4,"Lonely","Joel Corry",R.drawable.lonely,R.raw.lonely, R.string.lonely, fetchComments(4,comments));
+        Song song6 = new Song(5,5,"Intentions","Justin Bieber",R.drawable.intentions,R.raw.intentions, R.string.intentions, fetchComments(5,comments));
 
-        Song song7 = new Song(6,0,"She's Casual","The Hunna","shes_casual",R.raw.shescasual, fetchComments(6,comments));
-        Song song8 = new Song(7,1,"Someone You Loved","Lewis Capaldi","someone_you_loved",R.raw.someoneyouloved, fetchComments(7,comments));
-        Song song9 = new Song(8,2,"Human","The Killers","human",R.raw.human, fetchComments(8,comments));
-        Song song10 = new Song(9,3,"Dare","The Hunna","dare",R.raw.dare, fetchComments(9,comments));
-        Song song11 = new Song(10,4,"Sex","The 1975","sex",R.raw.sex, fetchComments(10,comments));
-        Song song12 = new Song(11,5,"Swim For Your Life","The Pale White","swim_for_your_life",R.raw.swimforyourlife, fetchComments(11,comments));
+        Song song7 = new Song(6,0,"She's Casual","The Hunna",R.drawable.shes_casual,R.raw.shescasual, R.string.shes_casual, fetchComments(6,comments));
+        Song song8 = new Song(7,1,"Someone You Loved","Lewis Capaldi",R.drawable.someone_you_loved,R.raw.someoneyouloved, R.string.someone_you_loved, fetchComments(7,comments));
+        Song song9 = new Song(8,2,"Human","The Killers",R.drawable.human,R.raw.human, R.string.human, fetchComments(8,comments));
+        Song song10 = new Song(9,3,"Dare","The Hunna",R.drawable.dare,R.raw.dare, R.string.dare, fetchComments(9,comments));
+        Song song11 = new Song(10,4,"Sex","The 1975",R.drawable.sex,R.raw.sex, R.string.sex, fetchComments(10,comments));
+        Song song12 = new Song(11,5,"Swim For Your Life","The Pale White",R.drawable.swim_for_your_life,R.raw.swimforyourlife, R.string.swim_for_your_life, fetchComments(11,comments));
 
         leftSongs = new ArrayList<>();
         leftSongs.add(song1);
@@ -91,18 +89,8 @@ public class SecondActivity extends AppCompatActivity {
         rightSongs.add(song12);
 
         allSongs = new ArrayList<>();
-        allSongs.add(song1);
-        allSongs.add(song2);
-        allSongs.add(song3);
-        allSongs.add(song4);
-        allSongs.add(song5);
-        allSongs.add(song6);
-        allSongs.add(song7);
-        allSongs.add(song8);
-        allSongs.add(song9);
-        allSongs.add(song10);
-        allSongs.add(song11);
-        allSongs.add(song12);
+        allSongs.addAll(leftSongs);
+        allSongs.addAll(rightSongs);
 
         initialiseAdapter();
 
@@ -116,7 +104,6 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     private void initialiseAdapter() {
-
         if (settingsObject == null) {
             settingsObject = new ArrayList<>();
             settingsObject.add("Light");
@@ -124,7 +111,10 @@ public class SecondActivity extends AppCompatActivity {
             settingsObject.add("18sp");
             settingsObject.add("1x");
             settingsObject.add("Grey");
+            settingsObject.add("Default");
         }
+
+        setProfilePicture();
 
         leftSideView = findViewById(R.id.leftSideView);
         leftSideView.setLayoutManager(new LinearLayoutManager(this));
@@ -136,6 +126,18 @@ public class SecondActivity extends AppCompatActivity {
         adapterRight = new SongAdapter(this, rightSongs, settingsObject, currentUser);
         rightSideView.setAdapter(adapterRight);
 
+    }
+
+    public void setProfilePicture() {
+        String[] picture_placeholders = {"Default", "Male 2D", "Female 2D", "Outdoors 1", "Outdoors 2", "Outdoors 3"};
+        Integer[] picture_values = {R.drawable.account,R.drawable.profile_male,R.drawable.profile_female,R.drawable.profile_outdoors1,R.drawable.profile_outdoors2,R.drawable.profile_outdoors3};
+        ImageView profilePicture = findViewById(R.id.profile);
+
+        for (int i=0;i<picture_placeholders.length;i++){
+            if (settingsObject.get(5).equals(picture_placeholders[i])){
+                profilePicture.setImageResource(picture_values[i]);
+            }
+        }
     }
 
     private void goToProfileActivity() {
@@ -168,7 +170,9 @@ public class SecondActivity extends AppCompatActivity {
             song_id = data.getIntExtra("song_id",0);
             array_pos = data.getIntExtra("array_pos",0);
 
-            comments[song_id] = updateSongs.get(array_pos).getComments();
+            if (updateSongs != null) {
+                comments[song_id] = updateSongs.get(array_pos).getComments();
+            }
             initialiseSongs(comments);
         }
     }

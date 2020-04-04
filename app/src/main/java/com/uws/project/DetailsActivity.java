@@ -39,19 +39,11 @@ public class DetailsActivity extends AppCompatActivity {
 
     ArrayList<Song> songs;
     Profile currentUser;
-
-    int song_id, array_pos;
-    String title;
-    String artist;
-    String artwork;
-    Integer audio;
+    int[] current_liked, new_liked;
+    int song_id, array_pos, song1, song2, song3;
+    String title, artist;
+    Integer artwork, audio, lyrics;
     String[] comments;
-
-    int[] current_liked;
-    int song1;
-    int song2;
-    int song3;
-    int[] new_liked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,40 +61,38 @@ public class DetailsActivity extends AppCompatActivity {
             array_pos = extras.getInt("array_pos");
             title = extras.getString("title");
             artist = extras.getString("artist");
-            artwork = extras.getString("artwork");
+            artwork = extras.getInt("artwork");
             audio = extras.getInt("audio");
+            lyrics = extras.getInt("lyrics");
             comments = extras.getStringArray("comments");
-
-            setTitle(title + " by " + artist);
-
-            playButton = findViewById(R.id.playButton);
-            pauseButton = findViewById(R.id.pauseButton);
-            stopButton = findViewById(R.id.stopButton);
-
-            likeButton = findViewById(R.id.likeButton);
-            current_liked = currentUser.getSongs();
-            song1 = current_liked[0];
-            song2 = current_liked[1];
-            song3 = current_liked[2];
-
-            textTitle = findViewById(R.id.detailTitle);
-            textTitle.setText(title);
-
-            textArtist = findViewById(R.id.detailArtist);
-            textArtist.setText(artist);
-
-            int albumID = getResources().getIdentifier(artwork,"drawable",getPackageName());
-            imageAlbum = findViewById(R.id.detailArtwork);
-            imageAlbum.setImageResource(albumID);
-
-            int lyricID = getResources().getIdentifier(artwork,"string",getPackageName());
-            textLyrics = findViewById(R.id.detailLyrics);
-            textLyrics.setText(lyricID);
-
-            lyricsAppearance();
-            initialiseComments();
-
         }
+
+        setTitle(title + " by " + artist);
+
+        playButton = findViewById(R.id.playButton);
+        pauseButton = findViewById(R.id.pauseButton);
+        stopButton = findViewById(R.id.stopButton);
+        likeButton = findViewById(R.id.likeButton);
+
+        current_liked = currentUser.getSongs();
+        song1 = current_liked[0];
+        song2 = current_liked[1];
+        song3 = current_liked[2];
+
+        textTitle = findViewById(R.id.detailTitle);
+        textTitle.setText(title);
+
+        textArtist = findViewById(R.id.detailArtist);
+        textArtist.setText(artist);
+
+        imageAlbum = findViewById(R.id.detailArtwork);
+        imageAlbum.setImageResource(artwork);
+
+        textLyrics = findViewById(R.id.detailLyrics);
+        textLyrics.setText(lyrics);
+
+        lyricsAppearance();
+        initialiseComments();
 
         // Comment button
         Button postButton = findViewById(R.id.postButton);
@@ -112,8 +102,7 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
 
-        // Like button
-
+        // Like stuff
         if (song_id == song1) {
             new_liked = new int[]{song1, song2, song3};
             likeButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
@@ -133,6 +122,7 @@ public class DetailsActivity extends AppCompatActivity {
             new_liked = new int[]{song_id, song1, song2};
         }
 
+        // Like button
         likeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 likeSong();
@@ -140,17 +130,13 @@ public class DetailsActivity extends AppCompatActivity {
         });
     }
 
-    public void likeSong() {
-
-        likeButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
-        likeButton.setTextColor(Color.parseColor("#303030"));
-        likeButton.setText(R.string.liked);
-        currentUser.setSongs(new_liked);
-    }
-
     public void initialiseComments() {
         comments_body = new ArrayList<>();
         comments_body.addAll(Arrays.asList(comments));
+
+        if (comments_body.isEmpty()) {
+            comments_body.add("No comments yet");
+        }
 
         commentsRecycler = findViewById(R.id.commentsRecycler);
         commentsRecycler.setLayoutManager(new LinearLayoutManager(this));
@@ -159,15 +145,20 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     public void postComment() {
-
         editComment = findViewById(R.id.editComment);
         String current_text = editComment.getText().toString();
         if (!current_text.equals("") && comments_body != null) {
             comments_body.add(current_text);
-            List<String> list = new ArrayList<>(Arrays.asList(comments));
-            list.add(current_text);
-            comments = list.toArray(new String[]{});
+            List<String> comments_list = new ArrayList<>(Arrays.asList(comments));
+            comments_list.add(current_text);
+            comments = comments_list.toArray(new String[]{});
             songs.get(array_pos).setComments(comments);
+
+            String[] user_comments = currentUser.getComments();
+            List<String> user_list = new ArrayList<>(Arrays.asList(user_comments));
+            user_list.add(current_text);
+            String[] test = user_list.toArray(new String[]{});
+            currentUser.setComments(test);
         }
 
         commentsRecycler = findViewById(R.id.commentsRecycler);
@@ -176,16 +167,16 @@ public class DetailsActivity extends AppCompatActivity {
         commentsRecycler.setAdapter(commentAdapter);
     }
 
+    public void likeSong() {
+        likeButton.setBackgroundColor(Color.parseColor("#FFFFFF"));
+        likeButton.setTextColor(Color.parseColor("#303030"));
+        likeButton.setText(R.string.liked);
+        currentUser.setSongs(new_liked);
+    }
+
     public void play (View v){
-        // PLACEHOLDER ARRAY UNTIL PASSING WORKS
-        Bundle extras = getIntent().getExtras();
-        Integer audio = null;
-        if (extras != null) {
-           audio = extras.getInt("audio");
-        }
-        int audioID = getResources().getIdentifier(String.valueOf(audio), "Integer", getPackageName());
         if (player == null) {
-            player = MediaPlayer.create(this, audioID);
+            player = MediaPlayer.create(this, audio);
             player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mp) {
@@ -246,12 +237,10 @@ public class DetailsActivity extends AppCompatActivity {
 
         int selection;
 
-        String[] style_placeholders = {"Light", "Regular", "Semi-bold", "Bold", "Black"};
-        String[] style_values = {"source_sans_pro_light", "source_sans_pro", "source_sans_pro_semibold", "source_sans_pro_bold", "source_sans_pro_black"};
+        String[] style_placeholders = {"Light", "Regular", "Semi-bold", "Bold", "Black", "Comic Sans"};
+        int[] style_values = {R.font.source_sans_pro_light,R.font.source_sans_pro,R.font.source_sans_pro_semibold,R.font.source_sans_pro_bold,R.font.source_sans_pro_black,R.font.comic_sans};
         selection = getSavedSetting(style_placeholders,0);
-
-        int typefaceID = getResources().getIdentifier(style_values[selection],"font",getPackageName());
-        Typeface typeface = ResourcesCompat.getFont(context, typefaceID);
+        Typeface typeface = ResourcesCompat.getFont(context, style_values[selection]);
         textLyrics.setTypeface(typeface);
 
         String[] colour_placeholders = {"White","Black","Grey","Red","Orange","Yellow","Green","Blue","Indigo", "Violet"};

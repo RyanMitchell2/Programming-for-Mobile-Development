@@ -5,46 +5,76 @@ import android.os.Parcelable;
 
 public class Song implements Parcelable {
 
-    private int song_id;
-    private int array_pos;
-    private String title;
-    private String artist;
-    private String artwork;
-    private Integer audio;
+    private int song_id, array_pos;
+    private String title, artist;
+    private Integer artwork, audio, lyrics;
     private String[] comments;
 
-    Song(int song_id, int array_pos, String username, String artist, String artwork, Integer audio, String[] comments) {
+    Song(int song_id, int array_pos, String username, String artist, Integer artwork, Integer audio, Integer lyrics, String[] comments) {
         this.song_id = song_id;
         this.array_pos = array_pos;
         this.title = username;
         this.artist = artist;
         this.artwork = artwork;
         this.audio = audio;
+        this.lyrics = lyrics;
         this.comments = comments;
     }
 
-    public int getSong_id() {
+    int getSong_id() {
         return song_id;
     }
 
-    public int getArray_pos() {
+    void setSong_id(int song_id) {
+        this.song_id = song_id;
+    }
+
+    int getArray_pos() {
         return array_pos;
     }
 
-    public String getTitle() {
+    void setArray_pos(int array_pos) {
+        this.array_pos = array_pos;
+    }
+
+    String getTitle() {
         return title;
     }
 
-    public String getArtist() {
+    void setTitle(String title) {
+        this.title = title;
+    }
+
+    String getArtist() {
         return artist;
     }
 
-    public String getArtwork() {
+    void setArtist(String artist) {
+        this.artist = artist;
+    }
+
+    Integer getArtwork() {
         return artwork;
     }
 
-    public Integer getAudio() {
+    void setArtwork(Integer artwork) {
+        this.artwork = artwork;
+    }
+
+    Integer getAudio() {
         return audio;
+    }
+
+    void setAudio(Integer audio) {
+        this.audio = audio;
+    }
+
+    Integer getLyrics() {
+        return lyrics;
+    }
+
+    void setLyrics(Integer lyrics) {
+        this.lyrics = lyrics;
     }
 
     public String[] getComments() {
@@ -61,8 +91,9 @@ public class Song implements Parcelable {
         dest.writeInt(array_pos);
         dest.writeString(title);
         dest.writeString(artist);
-        dest.writeString(artwork);
+        dest.writeInt(artwork);
         dest.writeInt(audio);
+        dest.writeInt(lyrics);
         dest.writeStringArray(comments);
     }
 
@@ -71,8 +102,9 @@ public class Song implements Parcelable {
         array_pos = parcel.readInt();
         title = parcel.readString();
         artist = parcel.readString();
-        artwork = parcel.readString();
+        artwork = parcel.readInt();
         audio = parcel.readInt();
+        lyrics = parcel.readInt();
         comments = parcel.createStringArray();
     }
 

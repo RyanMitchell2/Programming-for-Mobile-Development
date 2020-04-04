@@ -37,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(context, "Username and Password must have a value", duration);
                     toast.show();
                 } else {
-
                     goToSecondActivity();
                     String usernameWelcome = "Welcome " + username + "!";
                     Context context = getApplicationContext();
@@ -51,12 +50,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void goToSecondActivity() {
-
-        String biography = "Go to settings to change your biography";
-        String[] comments = {"Good music taste!", "Had the pleasure of meeting " + username + " at a charity do once. They were surprisingly down to earth, and VERY funny.","Don't really like your music taste."};
+        String biography = "Hi, my name is " + username + "! Welcome to my profile! Just got the app recently, looking forward to using it!";
+        String[] comments = {"Good music taste!", "Had the pleasure of meeting AlanB73 at a charity do once. They were surprisingly down to earth, and VERY funny.","Don't really like your music taste."};
         int[] songs = {0,6,10};
 
-        currentUser = new Profile(0,0, username, password, biography, comments, songs);
+        currentUser = new Profile(0,R.drawable.account, username, password, biography, comments, songs);
 
         Intent intent = new Intent(this, SecondActivity.class);
         intent.putExtra("user_details", currentUser);

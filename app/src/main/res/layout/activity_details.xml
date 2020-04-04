@@ -6,124 +6,6 @@
     android:layout_height="match_parent"
     android:background="#212121">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/likedSongLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
-        android:background="#303030"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/detailArtwork"
-            android:layout_width="125dp"
-            android:layout_height="125dp"
-            android:contentDescription="@string/artwork_description"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/placeholder" />
-
-        <LinearLayout
-            android:id="@+id/titleBarLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/detailArtwork"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/detailTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/source_sans_pro_bold"
-                android:scrollHorizontally="false"
-                android:text="@string/placeholder"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp" />
-
-            <TextView
-                android:id="@+id/detailArtist"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/source_sans_pro_light"
-                android:scrollHorizontally="false"
-                android:text="@string/placeholder"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp" />
-
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        style="?android:attr/buttonBarStyle"
-        android:id="@+id/buttonBarLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="12dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/likedSongLayout">
-
-        <Button
-            style="?android:attr/buttonBarButtonStyle"
-            android:id="@+id/playButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#303030"
-            android:fontFamily="@font/source_sans_pro_bold"
-            android:onClick="play"
-            android:text="@string/play"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            tools:layout_conversion_absoluteHeight="48dp"
-            tools:layout_conversion_absoluteWidth="88dp" />
-
-        <Button
-            style="?android:attr/buttonBarButtonStyle"
-            android:id="@+id/pauseButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:background="#303030"
-            android:fontFamily="@font/source_sans_pro_bold"
-            android:onClick="pause"
-            android:text="@string/pause"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            tools:layout_conversion_absoluteHeight="48dp"
-            tools:layout_conversion_absoluteWidth="88dp" />
-
-        <Button
-            style="?android:attr/buttonBarButtonStyle"
-            android:id="@+id/stopButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#303030"
-            android:fontFamily="@font/source_sans_pro_bold"
-            android:onClick="stop"
-            android:text="@string/stop"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            tools:layout_conversion_absoluteHeight="48dp"
-            tools:layout_conversion_absoluteWidth="88dp" />
-    </LinearLayout>
-
     <ScrollView
         android:id="@+id/detailsScrollView"
         android:layout_width="0dp"
@@ -135,8 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBarLayout"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/innerScrollLayout"
@@ -148,14 +29,128 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/likedSongLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#303030"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/detailArtwork"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:contentDescription="@string/artwork_description"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/placeholder" />
+
+                <LinearLayout
+                    android:id="@+id/titleBarLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/detailArtwork"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/detailTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/source_sans_pro_bold"
+                        android:scrollHorizontally="false"
+                        android:text="@string/placeholder"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/detailArtist"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/source_sans_pro_light"
+                        android:scrollHorizontally="false"
+                        android:text="@string/placeholder"
+                        android:textColor="#FFFFFF"
+                        android:textSize="22sp" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/buttonBarLayout"
+                style="?android:attr/buttonBarStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/likedSongLayout">
+
+                <Button
+                    android:id="@+id/playButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#303030"
+                    android:fontFamily="@font/source_sans_pro_bold"
+                    android:onClick="play"
+                    android:text="@string/play"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_conversion_absoluteHeight="48dp"
+                    tools:layout_conversion_absoluteWidth="88dp" />
+
+                <Button
+                    android:id="@+id/pauseButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:background="#303030"
+                    android:fontFamily="@font/source_sans_pro_bold"
+                    android:onClick="pause"
+                    android:text="@string/pause"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_conversion_absoluteHeight="48dp"
+                    tools:layout_conversion_absoluteWidth="88dp" />
+
+                <Button
+                    android:id="@+id/stopButton"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#303030"
+                    android:fontFamily="@font/source_sans_pro_bold"
+                    android:onClick="stop"
+                    android:text="@string/stop"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_conversion_absoluteHeight="48dp"
+                    tools:layout_conversion_absoluteWidth="88dp" />
+            </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/lyricLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/buttonBarLayout">
 
                 <TextView
                     android:id="@+id/detailLyrics"
@@ -232,7 +227,7 @@
                     android:hint="@string/enter_comment"
                     android:inputType="textPersonName"
                     android:textColor="#FFFFFF"
-                    android:textColorHint="#FFFFFF"
+                    android:textColorHint="#bfbfbf"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

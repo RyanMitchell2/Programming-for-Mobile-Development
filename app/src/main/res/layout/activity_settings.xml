@@ -159,7 +159,7 @@
                 android:fontFamily="@font/source_sans_pro_bold"
                 android:text="@string/background_option"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/speedSpinner" />
 
@@ -179,6 +179,34 @@
                 app:layout_constraintTop_toBottomOf="@+id/backgroundText" />
 
             <TextView
+                android:id="@+id/pictureText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/source_sans_pro_bold"
+                android:text="@string/picture_option"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/backgroundSpinner" />
+
+            <Spinner
+                android:id="@+id/pictureSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/spinner_bg"
+                android:padding="8dp"
+                android:prompt="@string/placeholder"
+                android:spinnerMode="dropdown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pictureText" />
+
+            <TextView
                 android:id="@+id/biographyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -189,7 +217,7 @@
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/backgroundSpinner" />
+                app:layout_constraintTop_toBottomOf="@+id/pictureSpinner" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/biographyContainer"
@@ -211,11 +239,11 @@
                     android:autofillHints="Biography"
                     android:backgroundTint="#FFFFFF"
                     android:ems="10"
-                    android:fontFamily="sans-serif-condensed-light"
+                    android:fontFamily="@font/source_sans_pro_light"
                     android:hint="@string/biography_edit"
                     android:inputType="textPersonName"
                     android:textColor="#FFFFFF"
-                    android:textColorHint="#FFFFFF"
+                    android:textColorHint="#bfbfbf"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -228,38 +256,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
+                android:backgroundTint="#303030"
                 android:fontFamily="@font/source_sans_pro_bold"
-                android:paddingStart="32dp"
-                android:paddingTop="16dp"
-                android:paddingEnd="32dp"
-                android:paddingBottom="16dp"
+                android:paddingStart="48dp"
+                android:paddingTop="24dp"
+                android:paddingEnd="48dp"
+                android:paddingBottom="24dp"
                 android:text="@string/save_settings"
-                android:textAllCaps="false"
-                android:textSize="18sp"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
                 android:typeface="sans"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.546"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/biographyContainer"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/biographyContainer" />
 
             <Button
                 android:id="@+id/defaultButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="32dp"
+                android:background="#303030"
                 android:fontFamily="@font/source_sans_pro_bold"
-                android:text="@string/defaultSettings"
-                android:textAllCaps="false"
+                android:paddingStart="24dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="24dp"
+                android:paddingBottom="12dp"
+                android:text="@string/default_settings"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.528"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/saveButton"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/saveButton" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

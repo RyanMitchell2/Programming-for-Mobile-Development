@@ -15,13 +15,11 @@ public class profileActivity extends AppCompatActivity {
 
     // This is all hardcoded for testing purposes and would be dynamic instead
 
-    ArrayList<String> profileObject;
     TextView usernameText, biographyText;
     TextView[] comments = new TextView[3];
     TextView[] titles = new TextView[3];
     TextView[] artists = new TextView[3];
     ImageView[] artworks = new ImageView[3];
-    int resourceId;
     Profile currentUser;
     ArrayList<String> settingsObject;
     ArrayList<Song> songs;
@@ -41,23 +39,20 @@ public class profileActivity extends AppCompatActivity {
             songs = extras.getParcelableArrayList("songs");
         }
 
-        // Placeholder code for testing
-
         usernameText = findViewById(R.id.usernameText);
         usernameText.setText(currentUser.getUsername());
-
 
         biographyText = findViewById(R.id.bioText);
         biographyText.setText(currentUser.getBiography());
 
         comments[0] = findViewById(R.id.commentText1);
-        comments[0].setText(currentUser.getComments()[0]);
+        comments[0].setText(currentUser.getComments()[currentUser.getComments().length-1]);
 
         comments[1] = findViewById(R.id.commentText2);
-        comments[1].setText(currentUser.getComments()[1]);
+        comments[1].setText(currentUser.getComments()[currentUser.getComments().length-2]);
 
         comments[2] = findViewById(R.id.commentText3);
-        comments[2].setText(currentUser.getComments()[2]);
+        comments[2].setText(currentUser.getComments()[currentUser.getComments().length-3]);
 
         int[] current_liked = currentUser.getSongs();
 
@@ -76,12 +71,24 @@ public class profileActivity extends AppCompatActivity {
         for (int index=0;index<3;index++) {
             titles[index].setText(songs.get(current_liked[index]).getTitle());
             artists[index].setText(songs.get(current_liked[index]).getArtist());
-            resourceId = getResources().getIdentifier(songs.get(current_liked[index]).getArtwork(), "drawable", getPackageName());
-            artworks[index].setImageResource(resourceId);
+            artworks[index].setImageResource(songs.get(current_liked[index]).getArtwork());
         }
+
+        setProfilePicture();
 
     }
 
+    public void setProfilePicture() {
+        String[] picture_placeholders = {"Default", "Male 2D", "Female 2D", "Outdoors 1", "Outdoors 2", "Outdoors 3"};
+        Integer[] picture_values = {R.drawable.account,R.drawable.profile_male,R.drawable.profile_female,R.drawable.profile_outdoors1,R.drawable.profile_outdoors2,R.drawable.profile_outdoors3};
+        ImageView profilePicture = findViewById(R.id.profilePicture);
+
+        for (int i=0;i<picture_placeholders.length;i++){
+            if (settingsObject.get(5).equals(picture_placeholders[i])){
+                profilePicture.setImageResource(picture_values[i]);
+            }
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -94,9 +101,6 @@ public class profileActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
-
-
-
 
 }
 

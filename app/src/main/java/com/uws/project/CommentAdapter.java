@@ -1,7 +1,6 @@
 package com.uws.project;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     private List<String> comments_body;
     private String username;
 
-    public CommentAdapter(Context context, List<String> comments_body, String username) {
+    CommentAdapter(Context context, List<String> comments_body, String username) {
         this.layoutInflater = LayoutInflater.from(context);
         this.context = context;
         this.comments_body = comments_body;
@@ -35,7 +34,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
-        String body = username + ": " + comments_body.get(position);
+
+        String body = username.toUpperCase() + ": " + comments_body.get(position);
+        if (comments_body.get(0).equals("No comments yet") && comments_body.size() == 1) {
+            body = comments_body.get(position);
+        }
         viewHolder.commentBody.setText(body);
     }
 

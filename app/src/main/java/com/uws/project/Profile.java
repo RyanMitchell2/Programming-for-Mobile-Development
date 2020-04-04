@@ -5,11 +5,8 @@ import android.os.Parcelable;
 
 public class Profile implements Parcelable {
 
-    private int user_id;
-    private int picture;
-    private String username;
-    private String password;
-    private String biography;
+    private int user_id, picture;
+    private String username, password, biography;
     private String[] comments;
     private int[] songs;
 
@@ -60,6 +57,10 @@ public class Profile implements Parcelable {
 
     String[] getComments() {
         return comments;
+    }
+
+    void setComments(String[] comments) {
+        this.comments = comments;
     }
 
     int[] getSongs() {

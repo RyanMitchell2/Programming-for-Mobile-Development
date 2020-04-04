@@ -1,6 +1,5 @@
 package com.uws.project;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +7,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,9 +18,8 @@ import java.util.Objects;
 public class SettingsActivity extends AppCompatActivity implements Serializable {
 
     EditText editBiography;
-    Spinner styleSpinner, colourSpinner, sizeSpinner, speedSpinner, backgroundSpinner;
+    Spinner styleSpinner, colourSpinner, sizeSpinner, speedSpinner, backgroundSpinner, pictureSpinner;
     ArrayList<String> settingsObject;
-    int testPOS = 0;
     Profile currentUser;
 
     public boolean onSupportNavigateUp() {
@@ -42,6 +39,7 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
         sizeSpinner = findViewById(R.id.sizeSpinner);
         speedSpinner = findViewById(R.id.speedSpinner);
         backgroundSpinner = findViewById(R.id.backgroundSpinner);
+        pictureSpinner = findViewById(R.id.pictureSpinner);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -83,6 +81,7 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
         styleList.add("Semi-bold");
         styleList.add("Bold");
         styleList.add("Black");
+        styleList.add("Comic Sans");
         ArrayAdapter<String> styleAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, styleList);
         styleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         styleSpinner.setAdapter(styleAdapter);
@@ -137,17 +136,24 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
         backgroundAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         backgroundSpinner.setAdapter(backgroundAdapter);
 
+        List<String> pictureList = new ArrayList<>();
+        pictureList.add("Default");
+        pictureList.add("Male 2D");
+        pictureList.add("Female 2D");
+        pictureList.add("Outdoors 1");
+        pictureList.add("Outdoors 2");
+        pictureList.add("Outdoors 3");
+        ArrayAdapter<String> pictureAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, pictureList);
+        pictureAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        pictureSpinner.setAdapter(pictureAdapter);
+
         setSpinnerDefaults();
 
     }
 
     // set spinner defaults
     public void setSpinnerDefaults() {
-        Context context = getApplicationContext();
-        CharSequence announcement = "settings toast:" + " " + settingsObject;
-        int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, announcement, duration);
-        toast.show();
+        int testPOS;
 
         testPOS = getSavedSetting(styleSpinner,settingsObject.get(0));
         styleSpinner.setSelection(testPOS);
@@ -163,6 +169,9 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
 
         testPOS = getSavedSetting(backgroundSpinner,settingsObject.get(4));
         backgroundSpinner.setSelection(testPOS);
+
+        testPOS = getSavedSetting(pictureSpinner,settingsObject.get(5));
+        pictureSpinner.setSelection(testPOS);
     }
 
     private int getSavedSetting(Spinner spinner, String setting){
@@ -181,6 +190,7 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
         Object size_option = sizeSpinner.getSelectedItem();
         Object speed_option = speedSpinner.getSelectedItem();
         Object background_option = backgroundSpinner.getSelectedItem();
+        Object picture_option = pictureSpinner.getSelectedItem();
 
         settingsObject = new ArrayList<>();
         settingsObject.add((String) style_option);
@@ -188,12 +198,16 @@ public class SettingsActivity extends AppCompatActivity implements Serializable 
         settingsObject.add((String) size_option);
         settingsObject.add((String) speed_option);
         settingsObject.add((String) background_option);
+        settingsObject.add((String) picture_option);
 
         currentUser.setBiography(editBiography.getText().toString());
+        if (currentUser.getBiography().equals("")) {
+            currentUser.setBiography("Go to settings to change your biography");
+        }
 
         Intent intent = new Intent();
-        intent.putExtra("user_details", currentUser);
         intent.putExtra("settings", settingsObject);
+        intent.putExtra("user_details", currentUser);
         setResult(2,intent);
         finish();
     }

@@ -13,15 +13,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("Welcome!");
-        Button button = (Button) findViewById(R.id.startButton);
+
+        Button button = findViewById(R.id.startButton);
         button.setOnClickListener(new View.OnClickListener() {
-
             public void onClick(View v) {
-
                 goToLoginActivity();
-
             }
-
         });
     }
 
